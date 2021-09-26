@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { v1 } from 'uuid';
 import './App.css';
 import {TaskType, TodoList} from "./todoList";
 
@@ -15,16 +16,22 @@ export type FilterValuesType = 'all' | 'completed' | 'active';
 export function App() {
 
     let [tasks, setTasks] = useState<Array<TaskType>>([
-        {id: 1, title: 'HTML&CSS', isDone: true},
-        {id: 2, title: 'JS', isDone: true},
-        {id: 3, title: 'React', isDone: false}
+        {id: v1(), title: 'HTML&CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'React', isDone: false}
     ]);
+    console.log(tasks);
     let [filter, setFilter] = useState<FilterValuesType>('all')
 
 
-    function removeTask(id: number) {
+    function removeTask(id: string) {
         let filterTask = tasks.filter(t => t.id !== id);
         setTasks(filterTask);
+    }
+    function addNewTask(title:string){
+        let newTask = {id: v1(), title:title, isDone:false};
+        let newTasks = [newTask,...tasks];
+        setTasks(newTasks);
     }
 
     function changeFilter(value: FilterValuesType) {
@@ -45,6 +52,7 @@ export function App() {
                       task={tasksForTodoList}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
+                      addNewTask = {addNewTask}
             />
 
         </div>
