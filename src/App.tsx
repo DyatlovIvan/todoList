@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { v1 } from 'uuid';
+import {v1} from 'uuid';
 import './App.css';
 import {TaskType, TodoList} from "./todoList";
 
@@ -28,14 +28,21 @@ export function App() {
         let filterTask = tasks.filter(t => t.id !== id);
         setTasks(filterTask);
     }
-    function addNewTask(title:string){
-        let newTask = {id: v1(), title:title, isDone:false};
-        let newTasks = [newTask,...tasks];
+
+    function addNewTask(title: string) {
+        let newTask = {id: v1(), title: title, isDone: false};
+        let newTasks = [newTask, ...tasks];
         setTasks(newTasks);
     }
 
     function changeFilter(value: FilterValuesType) {
         setFilter(value);
+    }
+
+
+
+    function changeSelectTask(id: string, isDone: boolean) {
+        setTasks(tasks.map(el=>el.id===id?{...el,isDone:isDone}:el))
     }
 
     let tasksForTodoList = tasks;
@@ -52,7 +59,9 @@ export function App() {
                       task={tasksForTodoList}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
-                      addNewTask = {addNewTask}
+                      addNewTask={addNewTask}
+                      changeSelectTask={changeSelectTask}
+                      filter = {filter}
             />
 
         </div>
