@@ -28,7 +28,8 @@ export function App() {
         ],
         [todoListId2]:[
             {id: v1(), title: 'Milk', isDone: true},
-            {id: v1(), title: 'Book', isDone: true},
+            {id: v1(), title: 'Diner', isDone: true},
+            {id: v1(), title: 'Beer', isDone: true},
         ]
     })
 
