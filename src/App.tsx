@@ -1,3 +1,4 @@
+import { title } from 'process';
 import React, {useState} from 'react';
 import {v1} from 'uuid';
 import './App.css';
@@ -22,14 +23,18 @@ export function App() {
 
     let [tasks, setTasks] = useState({
         [todoListId1]: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'HTML', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'React', isDone: false}
+            {id: v1(), title: 'React', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false},
+            {id: v1(), title: 'Angular', isDone: false},
+            {id: v1(), title: 'CSS', isDone: false}
+    
         ],
         [todoListId2]:[
-            {id: v1(), title: 'Milk', isDone: true},
-            {id: v1(), title: 'Diner', isDone: true},
-            {id: v1(), title: 'Beer', isDone: true},
+            {id: v1(), title: 'Milk', isDone: false},
+            {id: v1(), title: 'Bread', isDone: false},
+            {id: v1(), title: 'Beer', isDone: false},
         ]
     })
 
@@ -39,27 +44,21 @@ export function App() {
         setTasks({...tasks})
     }
 
-    function removeTask(id: string,todoListID:string) {
-        tasks[todoListID] = tasks[todoListID].filter(el=>el.id !==id);
-        setTasks({...tasks})
+    function removeTask(todoListID:string, id: string) {
+        setTasks({...tasks,[todoListID]:tasks[todoListID].filter(f=>f.id!==id)})
     }
 
-    function addNewTask(title: string,todoListID:string) {
-        let newTask = {id: v1(), title: title, isDone: false};
-        tasks[todoListID] = [newTask,...tasks[todoListID]]
-        setTasks({...tasks})
+    function addNewTask(todoListID:string, title: string) {
+        setTasks({...tasks,[todoListID]:[ {id: v1(), title: title, isDone: true},...tasks[todoListID]]})
     }
 
-    function changeFilter(value: FilterValuesType,todoListID:string) {
+    function changeSelectTask(todoListID:string, id: string, isDone: boolean) {
+      setTasks({...tasks,[todoListID]:tasks[todoListID].map(m=>m.id === id? {...m,isDone:isDone}:m)})
+    }
+
+    function changeFilter(todoListID:string, value: FilterValuesType) {
         setTodoLists(todoLists.map(el=>el.id===todoListID?{...el,filter: value}:el))
     }
-
-
-    function changeSelectTask(id: string, isDone: boolean,todoListID:string) {
-        tasks[todoListID] = tasks[todoListID].map(el=>el.id===id?{...el, isDone: isDone} : el)
-        setTasks({...tasks})
-    }
-
 
     return (
         <div className="App">

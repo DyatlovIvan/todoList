@@ -7,10 +7,10 @@ type propsType = {
     todoListID: string
     title: string
     task: Array<TaskType>
-    removeTask: (value: string,todoListID:string) => void
-    changeFilter: (value: FilterValuesType,todoListID:string) => void
-    addNewTask: (value: string,todoListID:string) => void
-    changeSelectTask: (id: string, isDone: boolean,todoListID:string) => void
+    removeTask: (todoListID:string, value: string) => void
+    changeFilter: (todoListID:string, value: FilterValuesType) => void
+    addNewTask: (todoListID:string, value: string) => void
+    changeSelectTask: (todoListID:string, id: string, isDone: boolean) => void
     filter: FilterValuesType
     removeTaskList:(todoListID:string) => void
 }
@@ -30,7 +30,7 @@ export const TodoList = (props: propsType) => {
     }
     const onKeyPressTitleHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            props.addNewTask(newTaskTitle,props.todoListID);
+            props.addNewTask(props.todoListID, newTaskTitle);
             setNewTaskTitle('');
         }
     }
@@ -39,23 +39,21 @@ export const TodoList = (props: propsType) => {
             setError('Error')
             return
         }
-        props.addNewTask(newTaskTitle,props.todoListID);
+        props.addNewTask(props.todoListID, newTaskTitle);
         setNewTaskTitle('');
     }
 
-    const onClickFilterHandler = (value: FilterValuesType) => props.changeFilter(value,props.todoListID);
-    const onClickRemoveTask = (ID: string) => props.removeTask(ID,props.todoListID);
+    const onClickFilterHandler = (value: FilterValuesType) => props.changeFilter(props.todoListID, value);
+    const onClickRemoveTask = (ID: string) => props.removeTask(props.todoListID, ID);
 
     const onChangeSelectHandler = (tId: string, e: ChangeEvent<HTMLInputElement>)=> {
-        props.changeSelectTask(tId, e.currentTarget.checked,props.todoListID)
+        props.changeSelectTask(props.todoListID, tId, e.currentTarget.checked)
     }
 
     const onClickRemoveTaskList = () =>{
         props.removeTaskList(props.todoListID)
     }
-    // if call handler with arg (arg, arg no event), {() => handler(arg)}
-    // if call handler without arg ( empty ), ={handler}
-
+   
     return (
         <div>
             <h3>
@@ -76,9 +74,9 @@ export const TodoList = (props: propsType) => {
                 {props.task.map(t => {
 
                     return (
-                        <li className={t.isDone === true ? style.isDone : ''}>
+                        <li>
                             <input type="checkbox" onChange={(e) => onChangeSelectHandler(t.id, e)} checked={t.isDone}/>
-                            <span>{t.title}</span>
+                            <span className={t.isDone === true ? style.isDone : ''}>{t.title}</span>
                             <button onClick={() => {
                                 onClickRemoveTask(t.id)
                             }}>x
