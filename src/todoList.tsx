@@ -1,6 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { FilterValuesType } from "./App";
 import style from './todoList.module.css'
+import {Button} from "./components/Button";
 
 
 type propsType = {
@@ -43,10 +44,11 @@ export const TodoList = (props: propsType) => {
         setNewTaskTitle('');
     }
 
-    //const onClickFilterHandler = (value: FilterValuesType) => props.changeFilter(props.todoListID, value);
-    const onAllFilterHandler = () => props.changeFilter(props.todoListID, 'all');
-    const onActiveFilterHandler = () => props.changeFilter(props.todoListID,'active' );
-    const onCompletedFilterHandler = () => props.changeFilter(props.todoListID, 'completed');
+    const onClickFilterHandler = (value: FilterValuesType) => props.changeFilter(props.todoListID, value);
+    // const onAllFilterHandler = () => props.changeFilter(props.todoListID, 'all');
+    // const onActiveFilterHandler = () => props.changeFilter(props.todoListID,'active' );
+    // const onCompletedFilterHandler = () => props.changeFilter(props.todoListID, 'completed');
+
 
     const onClickRemoveTask = (ID: string) => props.removeTask(props.todoListID, ID);
 
@@ -58,11 +60,22 @@ export const TodoList = (props: propsType) => {
         props.removeTaskList(props.todoListID)
     }
 
+    const mappingTasks = props.task.map(t => {
+
+        return (
+            <li>
+                <input type="checkbox" onChange={(e) => onChangeSelectHandler(t.id, e)} checked={t.isDone} />
+                <span className={t.isDone === true ? style.isDone : ''}>{t.title}</span>
+                <Button CallBack={()=>onClickRemoveTask(t.id)} name={'x'}/>
+            </li>)
+    })
+
     return (
         <div>
             <h3>
                 {props.title}
-                <button onClick={onClickRemoveTaskList}>x</button>
+                {/*<button onClick={onClickRemoveTaskList}>x</button>*/}
+                <Button CallBack={onClickRemoveTaskList} name={'x'}/>
             </h3>
             <div>
                 <input value={newTaskTitle}
@@ -75,19 +88,8 @@ export const TodoList = (props: propsType) => {
 
             </div>
             <ul>
-                {props.task.map(t => {
 
-                    return (
-                        <li>
-                            <input type="checkbox" onChange={(e) => onChangeSelectHandler(t.id, e)} checked={t.isDone} />
-                            <span className={t.isDone === true ? style.isDone : ''}>{t.title}</span>
-                            <button onClick={() => {
-                                onClickRemoveTask(t.id)
-                            }}>x
-                            </button>
-                        </li>)
-                })}
-
+                {mappingTasks}
 
             </ul>
             <div>
@@ -101,15 +103,9 @@ export const TodoList = (props: propsType) => {
                         onClick={() => {onClickFilterHandler('completed')}}>completed
                 </button> */}
 
-                <button className={props.filter === 'all' ? style.activeFilter : ''}
-                    onClick={onAllFilterHandler}>all
-                </button>
-                <button className={props.filter === 'active' ? style.activeFilter : ''}
-                    onClick={onActiveFilterHandler}>active
-                </button>
-                <button className={props.filter === 'completed' ? style.activeFilter : ''}
-                    onClick={onCompletedFilterHandler}>completed
-                </button>
+                <Button CallBack = {()=>onClickFilterHandler('all')} name = {'all'} style ={props.filter === 'all' ? style.activeFilter : ''}/>
+                <Button CallBack = {()=>onClickFilterHandler('active')} name = {'active'} style ={props.filter === 'active' ? style.activeFilter : ''}/>
+                <Button CallBack = {()=>onClickFilterHandler('completed')} name = {'completed'} style ={props.filter === 'completed' ? style.activeFilter : ''}/>
             </div>
         </div>
 
