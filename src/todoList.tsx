@@ -2,6 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { FilterValuesType } from "./App";
 import style from './todoList.module.css'
 import {Button} from "./components/Button";
+import {ImputWithButton} from "./components/ImputWithButton";
 
 
 type propsType = {
@@ -22,27 +23,27 @@ export type TaskType = {
 
 export const TodoList = (props: propsType) => {
 
-    const [newTaskTitle, setNewTaskTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
+    // const [newTaskTitle, setNewTaskTitle] = useState('')
+    // const [error, setError] = useState<string | null>(null)
 
-    const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(null);
-        setNewTaskTitle(e.currentTarget.value)
-    }
-    const onKeyPressTitleHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            props.addNewTask(props.todoListID, newTaskTitle);
-            setNewTaskTitle('');
-        }
-    }
-    const onClickTitleHandler = () => {
-        if (newTaskTitle.trim() === '') {
-            setError('Error')
-            return
-        }
-        props.addNewTask(props.todoListID, newTaskTitle);
-        setNewTaskTitle('');
-    }
+    // const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //     setError(null);
+    //     setNewTaskTitle(e.currentTarget.value)
+    // }
+    // const onKeyPressTitleHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    //     if (e.key === "Enter") {
+    //         props.addNewTask(props.todoListID, newTaskTitle);
+    //         setNewTaskTitle('');
+    //     }
+    // }
+    // const onClickTitleHandler = () => {
+    //     if (newTaskTitle.trim() === '') {
+    //         setError('Error')
+    //         return
+    //     }
+    //     props.addNewTask(props.todoListID, newTaskTitle);
+    //     setNewTaskTitle('');
+    // }
 
     const onClickFilterHandler = (value: FilterValuesType) => props.changeFilter(props.todoListID, value);
     // const onAllFilterHandler = () => props.changeFilter(props.todoListID, 'all');
@@ -78,13 +79,16 @@ export const TodoList = (props: propsType) => {
                 <Button CallBack={onClickRemoveTaskList} name={'x'}/>
             </h3>
             <div>
-                <input value={newTaskTitle}
-                    onChange={onChangeTitleHandler}
-                    onKeyPress={onKeyPressTitleHandler}
-                    className={error ? style.error : ''}
-                />
-                <button onClick={onClickTitleHandler}>+</button>
-                {error && <div className={style.errorMessage}>{error}</div>}
+                {/*<input value={newTaskTitle}*/}
+                {/*    onChange={onChangeTitleHandler}*/}
+                {/*    onKeyPress={onKeyPressTitleHandler}*/}
+                {/*    className={error ? style.error : ''}*/}
+                {/*/>*/}
+                {/*<button onClick={onClickTitleHandler}>+</button>*/}
+                {/*{error && <div className={style.errorMessage}>{error}</div>}*/}
+
+                <ImputWithButton addNewTask = {props.addNewTask}
+                                 todoListID = {props.todoListID}/>
 
             </div>
             <ul>
