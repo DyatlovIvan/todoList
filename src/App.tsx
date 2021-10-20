@@ -3,7 +3,7 @@ import {v1} from 'uuid';
 import './App.css';
 import {TaskType, TodoList} from "./todoList";
 import {AddItemForm} from "./components/AddItemForm";
-import {log} from "util";
+
 
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
