@@ -1,5 +1,9 @@
 import style from "../todoList.module.css";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button, IconButton, TextField} from "@mui/material";
+import {ControlPoint} from "@mui/icons-material";
+
+
 
 type AddItemFormType = {
     callBack: (title: string) => void
@@ -33,13 +37,17 @@ export const AddItemForm = (props: AddItemFormType) => {
     return (
         <div>
 
-            <input value={newTaskTitle}
-                   onChange={onChangeTitleHandler}
-                   onKeyPress={onKeyPressTitleHandler}
-                   className={error ? style.error : ''}
+            <TextField label={'type text'}
+                       value={newTaskTitle}
+                       onChange={onChangeTitleHandler}
+                       onKeyPress={onKeyPressTitleHandler}
+                       error={!!error}
+                       helperText={error}
             />
-            <button onClick={onClickTitleHandler}>+</button>
-            {error && <div className={style.errorMessage}>{error}</div>}
+            <IconButton onClick={onClickTitleHandler} color={'primary'}>
+                <ControlPoint/>
+            </IconButton>
+            {/*{error && <div className={style.errorMessage}>{error}</div>}*/}
 
         </div>
 

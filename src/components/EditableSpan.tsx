@@ -1,5 +1,6 @@
 import style from "../todoList.module.css";
 import React, {ChangeEvent, useState} from "react";
+import {TextField} from "@mui/material";
 
 
 type EditableSpanType = {
@@ -22,8 +23,8 @@ export const EditableSpan = ({title, isDone, callBack, ...props}: EditableSpanTy
     }
     return (
         edit ?
-            <input value={newTitle} onChange={onChangeHandler} className={isDone ? style.isDone : ''} onBlur={editFalse}
-                   autoFocus/> :
+            <TextField value={newTitle} onChange={onChangeHandler} className={isDone ? style.isDone : ''} onBlur={editFalse}
+                    autoFocus/>:
             <span onDoubleClick={editTrue} className={isDone ? style.isDone : ''}>{title}</span>
     )
 }
