@@ -95,8 +95,7 @@ export function App() {
         // setTasks({...tasks})
 
         todoListDispatch(removeTodoListAC(todoListID))
-        delete tasks[todoListID];
-        tasksDispatch(removeTaskForTodolistAC())
+        tasksDispatch(removeTaskForTodolistAC(todoListID))
     }
 
     const updateTodoList = (todoListID: string, title: string) => {

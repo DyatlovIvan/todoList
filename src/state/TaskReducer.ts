@@ -6,7 +6,9 @@ export const TaskReducer = (state: TasksType, action: MainType): TasksType => {
             return {[action.NewTaskListID]: [], ...state}
         }
         case 'REMOVE-TASK-FOR-TODOLIST': {
-            return {...state}
+            const newState = {...state}
+            delete newState[action.todoListID];
+            return {...newState}
         }
         case 'REMOVE-TASK': {
             return {...state, [action.todoListID]: state[action.todoListID].filter(f => f.id !== action.id)}
@@ -37,9 +39,9 @@ export const addTaskForNewTodolistAC = (NewTaskListID: string) => {
 }
 
 type removeTaskForTodolistACType = ReturnType<typeof removeTaskForTodolistAC>
-export const removeTaskForTodolistAC = () => {
+export const removeTaskForTodolistAC = (todoListID:string) => {
     return {
-        type: 'REMOVE-TASK-FOR-TODOLIST'
+        type: 'REMOVE-TASK-FOR-TODOLIST',todoListID
     } as const
 }
 
