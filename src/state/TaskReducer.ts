@@ -3,7 +3,7 @@ import {TasksType} from "../App";
 export const TaskReducer = (state: TasksType, action: MainType): TasksType => {
     switch (action.type) {
         case 'ADD-TASK-FOR-NEW-TODOLIST': {
-            return {[action.NewTaskListID]: [], ...state}
+            return {[action.newTaskListID]: [], ...state}
         }
         case 'REMOVE-TASK-FOR-TODOLIST': {
             const newState = {...state}
@@ -32,9 +32,9 @@ type MainType = addTaskForNewTodolistACType | removeTaskForTodolistACType | remo
     updateTaskACType|changeSelectTaskACType
 
 type addTaskForNewTodolistACType = ReturnType<typeof addTaskForNewTodolistAC>
-export const addTaskForNewTodolistAC = (NewTaskListID: string) => {
+export const addTaskForNewTodolistAC = (newTaskListID: string) => {
     return {
-        type: 'ADD-TASK-FOR-NEW-TODOLIST', NewTaskListID
+        type: 'ADD-TASK-FOR-NEW-TODOLIST', newTaskListID
     } as const
 }
 

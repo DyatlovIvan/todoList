@@ -81,9 +81,9 @@ export function App() {
 
     const AddNewTaskHandler = (title: string) => {
 
-        const NewTaskListID = v1()
-        todoListDispatch(AddNewTodoListAC(NewTaskListID, title))
-        tasksDispatch(addTaskForNewTodolistAC(NewTaskListID))
+        const newTaskListID = v1()
+        todoListDispatch(AddNewTodoListAC(newTaskListID, title))
+        tasksDispatch(addTaskForNewTodolistAC(newTaskListID))
         // setTodoLists([{id: NewTaskListID, title: title, filter: 'all'}, ...todoLists])
         //setTasks({[NewTaskListID]: [], ...tasks})
 
