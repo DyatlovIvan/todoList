@@ -1,6 +1,6 @@
 import {TasksType} from "../App";
 import {v1} from "uuid";
-import {todoListId1, todoListId2} from "./TodoListsReducer";
+import {AddNewTodoListACType, removeTodoListACType, todoListId1, todoListId2} from "./TodoListsReducer";
 
 const initialState:TasksType = {
     [todoListId1]: [
@@ -27,7 +27,7 @@ export const TaskReducer = (state: TasksType = initialState, action: MainType): 
         case 'REMOVE-TODOLIST': {
             const newState = {...state}
             delete newState[action.todoListID];
-            return {...newState}
+            return newState
         }
         case 'REMOVE-TASK': {
             return {...state, [action.todoListID]: state[action.todoListID].filter(f => f.id !== action.id)}
@@ -50,19 +50,19 @@ export const TaskReducer = (state: TasksType = initialState, action: MainType): 
 type MainType = AddNewTodoListACType | removeTodoListACType | removeTaskACType | addNewTaskACType |
     updateTaskACType|changeSelectTaskACType
 
-type AddNewTodoListACType = ReturnType<typeof AddNewTodoListAC>
-export const AddNewTodoListAC = (title:string) => {
-    return {
-        type: 'ADD-TODOLIST',title,todoListID:v1()
-    } as const
-}
+// type AddNewTodoListACType = ReturnType<typeof AddNewTodoListAC>
+// export const AddNewTodoListAC = (title:string) => {
+//     return {
+//         type: 'ADD-TODOLIST',title,todoListID:v1()
+//     } as const
+// }
 
-type removeTodoListACType = ReturnType<typeof removeTodoListAC>
-export const removeTodoListAC = (todoListID:string) => {
-    return {
-        type: 'REMOVE-TODOLIST',todoListID
-    } as const
-}
+// type removeTodoListACType = ReturnType<typeof removeTodoListAC>
+// export const removeTodoListAC = (todoListID:string) => {
+//     return {
+//         type: 'REMOVE-TODOLIST',todoListID
+//     } as const
+// }
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (todoListID: string, id: string) => {

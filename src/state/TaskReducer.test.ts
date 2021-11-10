@@ -1,6 +1,12 @@
 import {v1} from "uuid";
 import {TasksType} from "../App";
-import {addNewTaskAC, changeSelectTaskAC, removeTaskAC, TaskReducer, updateTaskAC} from "./TaskReducer";
+import {
+    addNewTaskAC,
+    changeSelectTaskAC,
+    removeTaskAC,
+    TaskReducer,
+    updateTaskAC
+} from "./TaskReducer";
 const todoListId1 = 'todoListId1';
 const todoListId2 =  'todoListId2';
 let startState: TasksType
@@ -29,8 +35,12 @@ test('remove task',()=>{
 })
 
  test('add task',()=>{
-     const endState = TaskReducer(startState,addNewTaskAC(todoListId1, '7', 'new task!'))
-     expect(endState[todoListId1].length).toBe(7)
+     const endState = TaskReducer(startState,addNewTaskAC(todoListId1,'new task!'))
+     expect(endState[todoListId1].length).toBe(7);
+     expect(endState[todoListId2].length).toBe(3);
+     expect(endState[todoListId1][0].id).toBeDefined();
+     expect(endState[todoListId1][0].title).toBe('new task!');
+     expect(endState[todoListId1][0].isDone).toBe(false);
  })
 
 test ('update task',()=>{
@@ -41,4 +51,5 @@ test ('update task',()=>{
 test ('change is done',()=>{
     const endState = TaskReducer(startState,changeSelectTaskAC(todoListId1, '1', false))
     expect(endState[todoListId1][0].isDone).toBe(false)
+    expect(endState[todoListId2][0].isDone).toBe(false)
 })
