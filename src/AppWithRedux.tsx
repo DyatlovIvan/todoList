@@ -1,5 +1,4 @@
 import React, {useReducer} from 'react';
-import {v1} from 'uuid';
 import './App.css';
 import {TaskType, TodoList} from "./todoList";
 import {AddItemForm} from "./components/AddItemForm";
@@ -32,35 +31,10 @@ export type todoListsType = {
 }
 
 export function AppWithRedux() {
-    let todoListId1 = v1();
-    let todoListId2 = v1();
 
     const dispatch = useDispatch()
     const todoLists = useSelector<AppRootState,Array<todoListsType>>(state=>state.TodoLists)
     const tasks = useSelector<AppRootState,TasksType>(state=>state.Tasks)
-
-    // let [todoLists, setTodoLists] = useState<Array<todoListsType>>([
-    //     {id: todoListId1, title: 'What to learn', filter: 'all'},
-    //     {id: todoListId2, title: 'What to buy', filter: 'all'}
-    // ])
-
-    // let [tasks, setTasks] = useState<TasksType>({
-    //     [todoListId1]: [
-    //         {id: v1(), title: 'HTML', isDone: true},
-    //         {id: v1(), title: 'JS', isDone: true},
-    //         {id: v1(), title: 'React', isDone: false},
-    //         {id: v1(), title: 'Redux', isDone: false},
-    //         {id: v1(), title: 'Angular', isDone: false},
-    //         {id: v1(), title: 'CSS', isDone: false}
-    //
-    //     ],
-    //     [todoListId2]: [
-    //         {id: v1(), title: 'Milk', isDone: false},
-    //         {id: v1(), title: 'Bread', isDone: false},
-    //         {id: v1(), title: 'Beer', isDone: false},
-    //     ]
-    // })
-
 
 
     const AddNewTaskHandler = (title: string) => {
@@ -111,7 +85,6 @@ export function AppWithRedux() {
         //setTasks({...tasks, [todoListID]: tasks[todoListID].map(m => m.id === id ? {...m, isDone: isDone} : m)})
         dispatch(changeSelectTaskAC(todoListID, id, isDone))
     }
-
 
     return (
         <div className="App">

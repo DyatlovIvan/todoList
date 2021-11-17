@@ -50,20 +50,6 @@ export const TaskReducer = (state: TasksType = initialState, action: MainType): 
 type MainType = AddNewTodoListACType | removeTodoListACType | removeTaskACType | addNewTaskACType |
     updateTaskACType|changeSelectTaskACType
 
-// type AddNewTodoListACType = ReturnType<typeof AddNewTodoListAC>
-// export const AddNewTodoListAC = (title:string) => {
-//     return {
-//         type: 'ADD-TODOLIST',title,todoListID:v1()
-//     } as const
-// }
-
-// type removeTodoListACType = ReturnType<typeof removeTodoListAC>
-// export const removeTodoListAC = (todoListID:string) => {
-//     return {
-//         type: 'REMOVE-TODOLIST',todoListID
-//     } as const
-// }
-
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (todoListID: string, id: string) => {
     return {
