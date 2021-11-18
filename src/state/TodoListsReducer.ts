@@ -36,8 +36,8 @@ export const removeTodoListAC = (todoListID:string)=>{
     }as const
 }
 
-export type AddNewTodoListACType = ReturnType<typeof AddNewTodoListAC>
-export const AddNewTodoListAC = (title:string)=>{
+export type AddNewTodoListACType = ReturnType<typeof addNewTodoListAC>
+export const addNewTodoListAC = (title:string)=>{
     return{
         type:'ADD-TODOLIST',title, todoListID:v1()
     }as const

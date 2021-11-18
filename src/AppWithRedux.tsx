@@ -5,7 +5,7 @@ import {AddItemForm} from "./components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    AddNewTodoListAC,
+    addNewTodoListAC,
     changeFilterTodoListAC,
     removeTodoListAC,
     updateTodoListAC
@@ -38,51 +38,34 @@ export function AppWithRedux() {
 
 
     const AddNewTaskHandler = (title: string) => {
-
-        //const newTaskListID = v1()
-        dispatch(AddNewTodoListAC(title))
-        //dispatch(AddNewTodoListAC(newTaskListID))
-        // setTodoLists([{id: NewTaskListID, title: title, filter: 'all'}, ...todoLists])
-        //setTasks({[NewTaskListID]: [], ...tasks})
-
+        dispatch(addNewTodoListAC(title))
     }
 
     const removeTaskList = (todoListID: string) => {
-        // setTodoLists(todoLists.filter(el => el.id !== todoListID));
-        // delete tasks[todoListID];
-        // setTasks({...tasks})
-
         dispatch(removeTodoListAC(todoListID))
     }
 
     const updateTodoList = (todoListID: string, title: string) => {
-        // setTodoLists(todoLists.map(m => m.id === todoListID ? {...m, title: title} : m))
         dispatch(updateTodoListAC(todoListID, title))
     }
 
     function changeFilter(todoListID: string, value: FilterValuesType) {
-        // setTodoLists(todoLists.map(el => el.id === todoListID ? {...el, filter: value} : el))
         dispatch(changeFilterTodoListAC(todoListID, value))
     }
 
     function removeTask(todoListID: string, id: string) {
-        //setTasks({...tasks, [todoListID]: tasks[todoListID].filter(f => f.id !== id)})
         dispatch(removeTaskAC(todoListID, id))
     }
 
     function addNewTask(todoListID: string, title: string) {
-        //setTasks({...tasks, [todoListID]: [{id: v1(), title: title, isDone: false}, ...tasks[todoListID]]})
-        //const newTaskID = v1()
         dispatch(addNewTaskAC(todoListID, title))
     }
 
     const updateTask = (todoListID: string, id: string, title: string) => {
-        //setTasks({...tasks, [todoListID]: tasks[todoListID].map(m => m.id === id ? {...m, title: title} : m)})
         dispatch(updateTaskAC(todoListID, id, title))
     }
 
     function changeSelectTask(todoListID: string, id: string, isDone: boolean) {
-        //setTasks({...tasks, [todoListID]: tasks[todoListID].map(m => m.id === id ? {...m, isDone: isDone} : m)})
         dispatch(changeSelectTaskAC(todoListID, id, isDone))
     }
 

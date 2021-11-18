@@ -6,7 +6,7 @@ import {AddItemForm} from "./components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    AddNewTodoListAC,
+    addNewTodoListAC,
     changeFilterTodoListAC,
     removeTodoListAC,
     TodoListReducer,
