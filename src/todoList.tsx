@@ -1,6 +1,5 @@
-import React, {ChangeEvent, FormEvent} from 'react';
-import {FilterValuesType} from "./App";
-import style from './todoList.module.css'
+import React, {ChangeEvent} from 'react';
+import {FilterValuesType} from "./AppWithRedux";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Button, createTheme, IconButton, ThemeProvider} from "@mui/material";
