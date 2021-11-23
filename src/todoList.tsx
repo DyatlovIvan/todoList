@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
@@ -41,9 +41,9 @@ export const TodoList = (props: propsType) => {
     // const onActiveFilterHandler = () => props.changeFilter(props.todoListID,'active' );
     // const onCompletedFilterHandler = () => props.changeFilter(props.todoListID, 'completed');
 
-    const AddTaskHandler = (title: string) => {
+    const AddTaskHandler = useCallback( (title: string) => {
         props.addNewTask(props.todoListID, title)
-    }
+    },[])
     const onClickRemoveTask = (ID: string) => props.removeTask(props.todoListID, ID);
 
     const onChangeSelectHandler = (tId: string, e: ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +84,8 @@ export const TodoList = (props: propsType) => {
 
             </h3>
 
-            <AddItemForm callBack={(title) => AddTaskHandler(title)}/>
+            {/*<AddItemForm callBack={(title) => AddTaskHandler(title)}/>*/}
+            <AddItemForm callBack={AddTaskHandler}/>
             {/*<div>*/}
             {/*    <input value={newTaskTitle}*/}
             {/*        onChange={onChangeTitleHandler}*/}

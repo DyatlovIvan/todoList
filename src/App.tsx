@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useCallback, useReducer} from 'react';
 import './App.css';
 import {TaskType, TodoList} from "./todoList";
 import {AddItemForm} from "./components/AddItemForm";
@@ -37,9 +37,9 @@ export function App() {
     const tasks = useSelector<AppRootState,TasksType>(state=>state.Tasks)
 
 
-    const AddNewTaskHandler = (title: string) => {
+    const AddNewTaskHandler = useCallback((title: string) => {
         dispatch(addNewTodoListAC(title))
-    }
+    },[])
 
     const removeTaskList = (todoListID: string) => {
         dispatch(removeTodoListAC(todoListID))
@@ -91,7 +91,7 @@ export function App() {
             </AppBar>
             <Container>
                 <Grid style={{padding: '20px'}}>
-                    <AddItemForm callBack={(title) => AddNewTaskHandler(title)}/>
+                    <AddItemForm callBack={AddNewTaskHandler}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {todoLists.map(el => {
