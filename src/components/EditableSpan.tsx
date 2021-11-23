@@ -8,7 +8,8 @@ type EditableSpanType = {
     isDone?: boolean
     callBack: (title: string) => void
 }
-export const EditableSpan = ({title, isDone, callBack, ...props}: EditableSpanType) => {
+export const EditableSpan = React.memo( ({title, isDone, callBack, ...props}: EditableSpanType) => {
+    console.log('EditableSpan')
     const [edit, setEdit] = useState<boolean>(false)
     let [newTitle, setNewTitle] = useState(title)
 
@@ -27,4 +28,4 @@ export const EditableSpan = ({title, isDone, callBack, ...props}: EditableSpanTy
                     autoFocus/>:
             <span onDoubleClick={editTrue} className={isDone ? style.isDone : ''}>{title}</span>
     )
-}
+})

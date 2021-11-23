@@ -39,35 +39,35 @@ export function App() {
 
     const AddNewTaskHandler = useCallback((title: string) => {
         dispatch(addNewTodoListAC(title))
-    }, [])
+    }, [dispatch])
 
     const removeTaskList = useCallback((todoListID: string) => {
         dispatch(removeTodoListAC(todoListID))
-    }, [])
+    }, [dispatch])
 
     const updateTodoList = useCallback((todoListID: string, title: string) => {
         dispatch(updateTodoListAC(todoListID, title))
-    }, [])
+    }, [dispatch])
 
     const changeFilter = useCallback((todoListID: string, value: FilterValuesType) => {
         dispatch(changeFilterTodoListAC(todoListID, value))
-    }, [])
+    }, [dispatch])
 
     const removeTask = useCallback((todoListID: string, id: string) => {
         dispatch(removeTaskAC(todoListID, id))
-    }, [])
+    }, [dispatch])
 
     const addNewTask = useCallback((todoListID: string, title: string) => {
         dispatch(addNewTaskAC(todoListID, title))
-    }, [])
+    }, [dispatch])
 
     const updateTask = useCallback((todoListID: string, id: string, title: string) => {
         dispatch(updateTaskAC(todoListID, id, title))
-    }, [])
+    }, [dispatch])
 
     const changeSelectTask = useCallback((todoListID: string, id: string, isDone: boolean) => {
         dispatch(changeSelectTaskAC(todoListID, id, isDone))
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="App">
@@ -97,12 +97,7 @@ export function App() {
                     {todoLists.map(el => {
 
                             let tasksForTodoList = tasks[el.id];
-                            if (el.filter === 'active') {
-                                tasksForTodoList = tasksForTodoList.filter(t => t.isDone)
-                            }
-                            if (el.filter === 'completed') {
-                                tasksForTodoList = tasksForTodoList.filter(t => !t.isDone)
-                            }
+
                             return (
                                 <Grid item>
                                     <Paper style={{padding: '10px'}}>
