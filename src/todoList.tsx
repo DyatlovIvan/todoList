@@ -33,8 +33,8 @@ export type TaskType = {
     id: string, title: string, isDone: boolean
 }
 
-export const TodoList = (props: propsType) => {
-
+export const TodoList = React.memo((props: propsType) => {
+    console.log('todolist')
 
     const onClickFilterHandler = (value: FilterValuesType) => props.changeFilter(props.todoListID, value);
     // const onAllFilterHandler = () => props.changeFilter(props.todoListID, 'all');
@@ -128,4 +128,4 @@ export const TodoList = (props: propsType) => {
         </div>
 
     )
-}
+})

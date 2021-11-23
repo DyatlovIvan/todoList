@@ -33,41 +33,41 @@ export type todoListsType = {
 export function App() {
 
     const dispatch = useDispatch()
-    const todoLists = useSelector<AppRootState,Array<todoListsType>>(state=>state.TodoLists)
-    const tasks = useSelector<AppRootState,TasksType>(state=>state.Tasks)
+    const todoLists = useSelector<AppRootState, Array<todoListsType>>(state => state.TodoLists)
+    const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
 
 
     const AddNewTaskHandler = useCallback((title: string) => {
         dispatch(addNewTodoListAC(title))
-    },[])
+    }, [])
 
-    const removeTaskList = (todoListID: string) => {
+    const removeTaskList = useCallback((todoListID: string) => {
         dispatch(removeTodoListAC(todoListID))
-    }
+    }, [])
 
-    const updateTodoList = (todoListID: string, title: string) => {
+    const updateTodoList = useCallback((todoListID: string, title: string) => {
         dispatch(updateTodoListAC(todoListID, title))
-    }
+    }, [])
 
-    function changeFilter(todoListID: string, value: FilterValuesType) {
+    const changeFilter = useCallback((todoListID: string, value: FilterValuesType) => {
         dispatch(changeFilterTodoListAC(todoListID, value))
-    }
+    }, [])
 
-    function removeTask(todoListID: string, id: string) {
+    const removeTask = useCallback((todoListID: string, id: string) => {
         dispatch(removeTaskAC(todoListID, id))
-    }
+    }, [])
 
-    function addNewTask(todoListID: string, title: string) {
+    const addNewTask = useCallback((todoListID: string, title: string) => {
         dispatch(addNewTaskAC(todoListID, title))
-    }
+    }, [])
 
-    const updateTask = (todoListID: string, id: string, title: string) => {
+    const updateTask = useCallback((todoListID: string, id: string, title: string) => {
         dispatch(updateTaskAC(todoListID, id, title))
-    }
+    }, [])
 
-    function changeSelectTask(todoListID: string, id: string, isDone: boolean) {
+    const changeSelectTask = useCallback((todoListID: string, id: string, isDone: boolean) => {
         dispatch(changeSelectTaskAC(todoListID, id, isDone))
-    }
+    }, [])
 
     return (
         <div className="App">
