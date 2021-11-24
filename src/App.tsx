@@ -30,7 +30,7 @@ export type todoListsType = {
     filter: FilterValuesType
 }
 
-export function App() {
+export const App = () => {
 
     const dispatch = useDispatch()
     const todoLists = useSelector<AppRootState, Array<todoListsType>>(state => state.TodoLists)
@@ -96,8 +96,6 @@ export function App() {
                 <Grid container spacing={3}>
                     {todoLists.map(el => {
 
-                            let tasksForTodoList = tasks[el.id];
-
                             return (
                                 <Grid item>
                                     <Paper style={{padding: '10px'}}>
@@ -105,7 +103,7 @@ export function App() {
                                             key={el.id}
                                             todoListID={el.id}
                                             title={el.title}
-                                            task={tasksForTodoList}
+                                            task={tasks[el.id]}
                                             removeTask={removeTask}
                                             changeFilter={changeFilter}
                                             addNewTask={addNewTask}
