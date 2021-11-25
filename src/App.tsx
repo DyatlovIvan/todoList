@@ -53,21 +53,21 @@ export const App = () => {
         dispatch(changeFilterTodoListAC(todoListID, value))
     }, [dispatch])
 
-    const removeTask = useCallback((todoListID: string, id: string) => {
-        dispatch(removeTaskAC(todoListID, id))
-    }, [dispatch])
-
     const addNewTask = useCallback((todoListID: string, title: string) => {
         dispatch(addNewTaskAC(todoListID, title))
     }, [dispatch])
 
-    const updateTask = useCallback((todoListID: string, id: string, title: string) => {
-        dispatch(updateTaskAC(todoListID, id, title))
-    }, [dispatch])
+    // const removeTask = useCallback((todoListID: string, id: string) => {
+    //     dispatch(removeTaskAC(todoListID, id))
+    // }, [dispatch])
 
-    const changeSelectTask = useCallback((todoListID: string, id: string, isDone: boolean) => {
-        dispatch(changeSelectTaskAC(todoListID, id, isDone))
-    }, [dispatch])
+    // const updateTask = useCallback((todoListID: string, id: string, title: string) => {
+    //     dispatch(updateTaskAC(todoListID, id, title))
+    // }, [dispatch])
+
+    // const changeSelectTask = useCallback((todoListID: string, id: string, isDone: boolean) => {
+    //     dispatch(changeSelectTaskAC(todoListID, id, isDone))
+    // }, [dispatch])
 
     return (
         <div className="App">
@@ -104,13 +104,10 @@ export const App = () => {
                                             todoListID={el.id}
                                             title={el.title}
                                             task={tasks[el.id]}
-                                            removeTask={removeTask}
                                             changeFilter={changeFilter}
                                             addNewTask={addNewTask}
-                                            changeSelectTask={changeSelectTask}
                                             filter={el.filter}
                                             removeTaskList={removeTaskList}
-                                            updateTask={updateTask}
                                             updateTodoList={updateTodoList}
                                         />
                                     </Paper>
