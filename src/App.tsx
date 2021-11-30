@@ -10,14 +10,10 @@ import {
     removeTodoListAC,
     updateTodoListAC
 } from "./state/TodoListsReducer";
-import {
-    addNewTaskAC,
-    changeSelectTaskAC,
-    removeTaskAC,
-    updateTaskAC
-} from "./state/TaskReducer";
+
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./store";
+import {addNewTask} from "./state/TaskReducer";
 
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
@@ -53,8 +49,8 @@ export const App = () => {
         dispatch(changeFilterTodoListAC(todoListID, value))
     }, [dispatch])
 
-    const addNewTask = useCallback((todoListID: string, title: string) => {
-        dispatch(addNewTaskAC(todoListID, title))
+    const addNewTaskHandler = useCallback((todoListID: string, title: string) => {
+        dispatch(addNewTask(todoListID, title))
     }, [dispatch])
 
     // const removeTask = useCallback((todoListID: string, id: string) => {
@@ -105,7 +101,7 @@ export const App = () => {
                                             title={el.title}
                                             task={tasks[el.id]}
                                             changeFilter={changeFilter}
-                                            addNewTask={addNewTask}
+                                            addNewTask={addNewTaskHandler}
                                             filter={el.filter}
                                             removeTaskList={removeTaskList}
                                             updateTodoList={updateTodoList}

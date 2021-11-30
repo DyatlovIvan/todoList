@@ -47,32 +47,32 @@ export const TaskReducer = (state: TasksType = initialState, action: MainType): 
     }
 }
 
-type MainType = AddNewTodoListACType | removeTodoListACType | removeTaskACType | addNewTaskACType |
-    updateTaskACType|changeSelectTaskACType
+type MainType = AddNewTodoListACType | removeTodoListACType | removeTaskType | addNewTaskType |
+    updateTaskType|changeSelectTaskType
 
-type removeTaskACType = ReturnType<typeof removeTaskAC>
-export const removeTaskAC = (todoListID: string, id: string) => {
+type removeTaskType = ReturnType<typeof removeTask>
+export const removeTask = (todoListID: string, id: string) => {
     return {
         type: 'REMOVE-TASK', todoListID, id
     } as const
 }
 
-type addNewTaskACType = ReturnType<typeof addNewTaskAC>
-export const addNewTaskAC = (todoListID: string, title: string) => {
+type addNewTaskType = ReturnType<typeof addNewTask>
+export const addNewTask = (todoListID: string, title: string) => {
     return {
         type: 'ADD-NEW-TASK', todoListID, newTaskID:v1(), title
     } as const
 }
 
-type updateTaskACType = ReturnType<typeof updateTaskAC>
-export const updateTaskAC = (todoListID: string, id: string, title: string) => {
+type updateTaskType = ReturnType<typeof updateTask>
+export const updateTask = (todoListID: string, id: string, title: string) => {
     return {
         type: 'UPDATE-TASK', todoListID, id, title
     } as const
 }
 
-type changeSelectTaskACType = ReturnType<typeof changeSelectTaskAC>
-export const changeSelectTaskAC = (todoListID: string, id: string, isDone: boolean)=>{
+type changeSelectTaskType = ReturnType<typeof changeSelectTask>
+export const changeSelectTask = (todoListID: string, id: string, isDone: boolean)=>{
     return{
         type:'CHANGE-SELECT-TASK',todoListID,id,isDone
     }as const
