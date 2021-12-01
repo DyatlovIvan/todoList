@@ -1,13 +1,22 @@
 import {AddItemForm} from "./AddItemForm";
 import {action} from "@storybook/addon-actions";
+import {Component} from "react";
+import {ComponentMeta, ComponentStory} from "@storybook/react";
 
 export default {
     title:'AddItemForm Component',
-    component:AddItemForm
-}
-const callBack = action(`Button 'add' was pressed inside the form`)
-export const AddItemFormBaseExample = (props:any)=>{
-    return(
-        <AddItemForm callBack={callBack}/>
-    )
+    component:AddItemForm,
+    argTypes:{
+        callBack:{
+            description:'Button inside from clicked'
+        }
+    }
+} as ComponentMeta<typeof AddItemForm>
+
+const Template:ComponentStory<typeof AddItemForm> = (args) => <AddItemForm{...args}/>
+
+export const AddItemFromStory = Template.bind({});
+
+AddItemFromStory.args = {
+    callBack:action('Button inside from clicked')
 }
