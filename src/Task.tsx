@@ -4,7 +4,7 @@ import {EditableSpan} from "./components/EditableSpan";
 import {Delete} from "@mui/icons-material";
 import {TaskType} from "./todoList";
 import {useDispatch} from "react-redux";
-import {changeSelectTask, removeTask, updateTask} from "./state/TaskReducer";
+import {changeSelectTask, removeTask, updateTask} from "./state/tasksReducer";
 
 type TaskPropsType = {
     task: TaskType

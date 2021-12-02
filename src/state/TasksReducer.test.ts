@@ -4,9 +4,9 @@ import {
     addNewTask,
     changeSelectTask,
     removeTask,
-    TaskReducer,
+    TasksReducer,
     updateTask
-} from "./TaskReducer";
+} from "./tasksReducer";
 const todoListId1 = 'todoListId1';
 const todoListId2 =  'todoListId2';
 let startState: TasksType
@@ -30,12 +30,12 @@ beforeEach(() => {
 
 
 test('remove task',()=>{
-    const endState = TaskReducer(startState,removeTask(todoListId1, '1'))
+    const endState = TasksReducer(startState,removeTask(todoListId1, '1'))
     expect(endState[todoListId1].length).toBe(5)
 })
 
  test('add task',()=>{
-     const endState = TaskReducer(startState,addNewTask(todoListId1,'new task!'))
+     const endState = TasksReducer(startState,addNewTask(todoListId1,'new task!'))
      expect(endState[todoListId1].length).toBe(7);
      expect(endState[todoListId2].length).toBe(3);
      expect(endState[todoListId1][0].id).toBeDefined();
@@ -44,12 +44,12 @@ test('remove task',()=>{
  })
 
 test ('update task',()=>{
-    const endState = TaskReducer(startState,updateTask(todoListId1, '1', 'hey'))
+    const endState = TasksReducer(startState,updateTask(todoListId1, '1', 'hey'))
     expect(endState[todoListId1][0].title).toBe('hey')
 })
 
 test ('change is done',()=>{
-    const endState = TaskReducer(startState,changeSelectTask(todoListId1, '1', false))
+    const endState = TasksReducer(startState,changeSelectTask(todoListId1, '1', false))
     expect(endState[todoListId1][0].isDone).toBe(false)
     expect(endState[todoListId2][0].isDone).toBe(false)
 })

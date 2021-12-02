@@ -1,6 +1,6 @@
 import {TasksType} from "../App";
 import {v1} from "uuid";
-import {AddNewTodoListACType, removeTodoListACType, todoListId1, todoListId2} from "./TodoListsReducer";
+import {AddNewTodoListACType, removeTodoListACType, todoListId1, todoListId2} from "./todoListsReducer";
 
 const initialState:TasksType = {
     [todoListId1]: [
@@ -19,7 +19,7 @@ const initialState:TasksType = {
     ]
 }
 
-export const TaskReducer = (state: TasksType = initialState, action: MainType): TasksType => {
+export const TasksReducer = (state: TasksType = initialState, action: MainType): TasksType => {
     switch (action.type) {
         case 'ADD-TODOLIST': {
             return {[action.todoListID]: [], ...state}
