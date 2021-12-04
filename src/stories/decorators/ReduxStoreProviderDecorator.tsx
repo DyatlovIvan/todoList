@@ -31,6 +31,6 @@ type AppRootState = ReturnType<typeof rootReducer>
 export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootState);
 
 
-export const ReduxStoreProviderDecorator = (stotyFn:any) => {
-    return <Provider store={storyBookStore}>{stotyFn()}</Provider>
+export const ReduxStoreProviderDecorator = (storyFn:any) => {
+    return <Provider store={storyBookStore}>{storyFn()}</Provider>
 }
