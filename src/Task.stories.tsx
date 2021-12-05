@@ -1,8 +1,5 @@
 import {Task} from "./Task";
-import {action} from "@storybook/addon-actions";
-import {Component} from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import {TaskType} from "./todoList";
 import {v1} from "uuid";
 import {store} from "./store";
 import {Provider} from "react-redux";
