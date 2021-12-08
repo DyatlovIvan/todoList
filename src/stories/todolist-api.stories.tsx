@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
+import {todolistsApi} from "../api/todolistsApi";
 
 export default {
     title: 'API'
 }
 
 const settings = {
-    withCredentials:true,
-    headers:{
-        'API-KEY':'d7bfc3c8-2c2d-429a-afe3-69f3367ec679'
+    withCredentials: true,
+    headers: {
+        'API-KEY': 'd7bfc3c8-2c2d-429a-afe3-69f3367ec679'
     }
 }
 
@@ -17,11 +18,10 @@ export const GetTodolists = () => {
     useEffect(() => {
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
-        axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists',settings)
-            .then((res)=>{
+        todolistsApi.getTodolists()
+            .then((res) => {
                 setState(res.data)
             })
-
     }, [])
 
     return <div> {JSON.stringify(state)}</div>
@@ -29,8 +29,8 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists',{title:'TodoList1'},settings)
-            .then((res)=>{
+        todolistsApi.createTodolist('Yoyo')
+            .then((res) => {
                 setState(res.data)
             })
     }, [])
@@ -39,9 +39,10 @@ export const CreateTodolist = () => {
 }
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() =>  {
-        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${'558c2d84-d457-4a1f-835e-ebefaf0b47c0'}`,settings)
-            .then((res)=>{
+    useEffect(() => {
+        const todolistId = '41b9b96d-d010-4930-a3ad-e1e20f2df699'
+        todolistsApi.deleteTodolist(todolistId)
+            .then((res) => {
                 setState(res.data)
             })
     }, [])
@@ -51,8 +52,10 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${'d19ffde6-f246-45b5-8d43-32268d26c631'}`,{title:'TodoList2'},settings)
-            .then((res)=>{
+        const todolistId = 'd19ffde6-f246-45b5-8d43-32268d26c631'
+        const title = 'yoyoyo'
+        todolistsApi.updateTodolist(todolistId, title)
+            .then((res) => {
                 setState(res.data)
             })
     }, [])
