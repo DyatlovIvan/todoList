@@ -47,5 +47,8 @@ export const todolistsApi = {
     },
     updateTodolist(id: string, title: string) {
         return axios.put<ResponseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title: title}, settings)
-    }
+    },
+    getTasks(todolistId:string) {
+        return axios.get(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks`, settings)
+    },
 }
