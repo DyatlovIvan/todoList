@@ -1,10 +1,11 @@
 import React, {useCallback} from 'react';
-import {FilterValuesType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Button, createTheme, IconButton, ThemeProvider} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task";
+import {TaskStatuses, TaskType} from './api/todolistsApi';
+import {FilterValuesType} from "./state/todoListsReducer";
 
 const theme = createTheme({
     palette: {
@@ -26,9 +27,6 @@ type propsType = {
     updateTodoList: (todoListID: string, title: string) => void
 }
 
-export type TaskType = {
-    id: string, title: string, isDone: boolean
-}
 
 export const TodoList = React.memo((props: propsType) => {
     console.log('todolist')
@@ -53,10 +51,10 @@ export const TodoList = React.memo((props: propsType) => {
 
     let tasksForTodoList = props.task
     if (props.filter === 'active') {
-        tasksForTodoList = tasksForTodoList.filter(t => t.isDone)
+        tasksForTodoList = tasksForTodoList.filter(t => t.status = TaskStatuses.Complete)
     }
     if (props.filter === 'completed') {
-        tasksForTodoList = tasksForTodoList.filter(t => !t.isDone)
+        tasksForTodoList = tasksForTodoList.filter(t => t.status = TaskStatuses.New)
     }
 
     const mappingTasks = tasksForTodoList.map(t => {
