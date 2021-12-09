@@ -13,6 +13,7 @@ type TaskPropsType = {
 export const Task = React.memo(({task, todoListID}: TaskPropsType) => {
     const dispatch = useDispatch();
     const onChangeSelectHandler = useCallback((id: string, e: ChangeEvent<HTMLInputElement>) => {
+        debugger
         const isDone = e.currentTarget.checked;
         dispatch(changeSelectTask(todoListID, id, isDone?TaskStatuses.Complete:TaskStatuses.New))
     }, [dispatch])

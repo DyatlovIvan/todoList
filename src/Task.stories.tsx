@@ -26,7 +26,7 @@ TaskIsDoneStory.args = {
 }
 export const TaskNotIsDoneStory = Template.bind({});
 TaskNotIsDoneStory.args = {
-    task:  {"id": v1(), "title": 'HTML', "status": TaskStatuses.Complete,
+    task:  {"id": v1(), "title": 'HTML', "status": TaskStatuses.New,
         "description":'',"startDate":'',"deadline":'',"addedDate":'',"order":0,
         "priority":TaskPriorities.Low,"todoListId": '1'},
     todoListID: '1'
