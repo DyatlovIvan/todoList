@@ -1,14 +1,15 @@
 import style from "../todoList.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {TextField} from "@mui/material";
+import {TaskStatuses} from "../api/todolistsApi";
 
 
 type EditableSpanType = {
     title: string
-    isDone?: boolean
+    status?: number
     callBack: (title: string) => void
 }
-export const EditableSpan = React.memo( ({title, isDone, callBack, ...props}: EditableSpanType) => {
+export const EditableSpan = React.memo( ({title, status, callBack, ...props}: EditableSpanType) => {
     console.log('EditableSpan')
     const [edit, setEdit] = useState<boolean>(false)
     let [newTitle, setNewTitle] = useState(title)
@@ -24,8 +25,8 @@ export const EditableSpan = React.memo( ({title, isDone, callBack, ...props}: Ed
     }
     return (
         edit ?
-            <TextField value={newTitle} onChange={onChangeHandler} className={isDone ? style.isDone : ''} onBlur={editFalse}
+            <TextField value={newTitle} onChange={onChangeHandler} className={status===TaskStatuses.Complete ? style.isDone : ''} onBlur={editFalse}
                     autoFocus/>:
-            <span onDoubleClick={editTrue} className={isDone ? style.isDone : ''}>{title}</span>
+            <span onDoubleClick={editTrue} className={status===TaskStatuses.Complete ? style.isDone : ''}>{title}</span>
     )
 })

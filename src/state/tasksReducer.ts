@@ -29,7 +29,7 @@ export const TasksReducer = (state: TasksType = initialState, action: MainType):
             return {...state, [action.todoListID]: state[action.todoListID].map(m => m.id === action.id ? {...m, title: action.title} : m)}
         }
         case 'CHANGE-SELECT-TASK': {
-            return {...state, [action.todoListID]: state[action.todoListID].map(m => m.id === action.id ? {...m, isDone: action.isDone} : m)}
+            return {...state, [action.todoListID]: state[action.todoListID].map(m => m.id === action.id ? {...m, status: action.status} : m)}
         }
 
         default:
@@ -62,8 +62,8 @@ export const updateTask = (todoListID: string, id: string, title: string) => {
 }
 
 type changeSelectTaskType = ReturnType<typeof changeSelectTask>
-export const changeSelectTask = (todoListID: string, id: string, isDone: boolean)=>{
+export const changeSelectTask = (todoListID: string, id: string, status:number)=>{
     return{
-        type:'CHANGE-SELECT-TASK',todoListID,id,isDone
+        type:'CHANGE-SELECT-TASK',todoListID,id,status
     }as const
 }

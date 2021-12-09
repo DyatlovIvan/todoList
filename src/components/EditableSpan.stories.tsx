@@ -1,11 +1,11 @@
 import {EditableSpan} from "./EditableSpan";
 import {action} from "@storybook/addon-actions";
-import {Component} from "react";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
+import {TaskStatuses} from "../api/todolistsApi";
 
 export default {
-    title:'EditableSpan Component',
-    component:EditableSpan,
+    title: 'EditableSpan Component',
+    component: EditableSpan,
     // argTypes:{
     //     callBack:{
     //         description:'Button inside from clicked'
@@ -13,13 +13,12 @@ export default {
     // }
 } as ComponentMeta<typeof EditableSpan>
 
-const Template:ComponentStory<typeof EditableSpan> = (args) => <EditableSpan{...args}/>
+const Template: ComponentStory<typeof EditableSpan> = (args) => <EditableSpan{...args}/>
 
 export const EditableSpanFromStory = Template.bind({});
 
 EditableSpanFromStory.args = {
-    // callBack:action('Button inside from clicked')
     title: 'string',
-    isDone: true,
+    status: TaskStatuses.Complete,
     callBack: action('Action')
 }
