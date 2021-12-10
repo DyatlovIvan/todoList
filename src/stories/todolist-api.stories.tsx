@@ -165,12 +165,16 @@ export const UpdateTask = () => {
 
    const onClickHandler = () =>{
         todolistsApi.updateTask(todolistId, taskId, {
+            id: taskId,
             title:title,
+            todoListId:todolistId,
             description:description,
             status:status,
             priority:priority,
             startDate:'',
-            deadline:''
+            deadline:'',
+            addedDate:'',
+            order:0
         })
             .then((res) => {
                 setState(res.data)

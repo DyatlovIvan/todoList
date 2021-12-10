@@ -76,12 +76,16 @@ type GetTaskResponseType = {
 
 
 type UpdateTaskModelType = {
+    id:string
     title: string
+    todoListId:string
     description: string
     status: number
     priority: number
     startDate: string
     deadline: string
+    addedDate: string
+    order:number
 }
 
 
