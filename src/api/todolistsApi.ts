@@ -76,16 +76,15 @@ type GetTaskResponseType = {
 
 
 type UpdateTaskModelType = {
-    id:string
     title: string
+    id:string
     todoListId:string
     description: string
     status: number
     priority: number
     startDate: string
     deadline: string
-    addedDate: string
-    order:number
+
 }
 
 
@@ -113,6 +112,6 @@ export const todolistsApi = {
     },
     updateTask(todolistId:string,taskId:string,model:UpdateTaskModelType){
         debugger
-        return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`,{model})
+        return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`,model)
     }
 }

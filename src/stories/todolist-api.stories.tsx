@@ -173,8 +173,7 @@ export const UpdateTask = () => {
             priority:priority,
             startDate:'',
             deadline:'',
-            addedDate:'',
-            order:0
+
         })
             .then((res) => {
                 setState(res.data)
