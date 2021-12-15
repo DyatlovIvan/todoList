@@ -5,10 +5,9 @@ import {AddItemForm} from "./components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    addNewTodoListAC,
-    changeFilterTodoListAC, fetchTodolists, FilterValuesType,
-    removeTodoListAC, TodolistDomainType,
-    updateTodoListAC
+    addNewTodolistTC,
+    changeFilterTodoListAC, fetchTodolists, FilterValuesType, removeTodoListTC,
+    TodolistDomainType, updateTodoListAC
 } from "./state/todoListsReducer";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -31,14 +30,14 @@ export const App = () => {
     },[])
 
     const addNewTodolistHandler = useCallback((title: string) => {
-        dispatch(addNewTodoListAC(title))
+        dispatch(addNewTodolistTC(title))
     }, [dispatch])
 
-    const removeTaskList = useCallback((todoListID: string) => {
-        dispatch(removeTodoListAC(todoListID))
+    const removeTodolist = useCallback((todoListID: string) => {
+        dispatch(removeTodoListTC(todoListID))
     }, [dispatch])
 
-    const updateTodoList = useCallback((todoListID: string, title: string) => {
+    const updateTodolistTitle = useCallback((todoListID: string, title: string) => {
         dispatch(updateTodoListAC(todoListID, title))
     }, [dispatch])
 
@@ -100,8 +99,8 @@ export const App = () => {
                                             changeFilter={changeFilter}
                                             addNewTask={addNewTaskHandler}
                                             filter={el.filter}
-                                            removeTaskList={removeTaskList}
-                                            updateTodoList={updateTodoList}
+                                            removeTodolist={removeTodolist}
+                                            updateTodolistTitle={updateTodolistTitle}
                                         />
                                     </Paper>
                                 </Grid>

@@ -17,7 +17,6 @@ const theme = createTheme({
     }
 })
 
-
 type propsType = {
     todoListID: string
     title: string
@@ -25,8 +24,8 @@ type propsType = {
     changeFilter: (todoListID: string, value: FilterValuesType) => void
     addNewTask: (todoListID: string, value: string) => void
     filter: FilterValuesType
-    removeTaskList: (todoListID: string) => void
-    updateTodoList: (todoListID: string, title: string) => void
+    removeTodolist: (todoListID: string) => void
+    updateTodolistTitle: (todoListID: string, title: string) => void
 }
 
 
@@ -48,12 +47,12 @@ export const TodoList = React.memo((props: propsType) => {
 
 
     const onClickRemoveTaskList = () => {
-        props.removeTaskList(props.todoListID)
+        props.removeTodolist(props.todoListID)
     }
 
-    const updateTodoListHandler = useCallback((newTitle: string) => {
-        props.updateTodoList(props.todoListID, newTitle)
-    }, [props.updateTodoList, props.todoListID])
+    const updateTodolistHandler = useCallback((newTitle: string) => {
+        props.updateTodolistTitle(props.todoListID, newTitle)
+    }, [props.updateTodolistTitle, props.todoListID])
 
     let tasksForTodoList = props.task
     if (props.filter === 'active') {
@@ -76,7 +75,7 @@ export const TodoList = React.memo((props: propsType) => {
         <div>
 
             <h3>
-                <EditableSpan title={props.title} callBack={updateTodoListHandler}/>
+                <EditableSpan title={props.title} callBack={updateTodolistHandler}/>
                 <IconButton onClick={onClickRemoveTaskList}>
                     <Delete/>
                 </IconButton>
