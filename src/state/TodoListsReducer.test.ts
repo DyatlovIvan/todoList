@@ -1,7 +1,7 @@
 import {
     addNewTodoListAC,
     changeFilterTodoListAC, FilterValuesType,
-    removeTodoListAC, TodolistDomainType,
+    removeTodoListAC, setTodoLists, TodolistDomainType,
     TodoListsReducer,
     updateTodoListAC
 } from './todoListsReducer';
@@ -75,6 +75,18 @@ test('correct filter of todolist should be changed', () => {
     expect(endState[0].filter).toBe("all");
     expect(endState[1].filter).toBe(newFilter);
 });
+
+test('set todolists',()=>{
+    let todolistId1 = v1();
+    let todolistId2 = v1();
+    const state: Array<TodolistDomainType> = [
+        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all"},
+        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all"}
+    ]
+    const endState = TodoListsReducer([],setTodoLists(state))
+    expect(endState.length).toBe(2)
+
+})
 
 
 

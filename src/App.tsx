@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import { TodoList} from "./todoList";
 import {AddItemForm} from "./components/AddItemForm";
@@ -6,7 +6,7 @@ import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography}
 import {Menu} from "@mui/icons-material";
 import {
     addNewTodoListAC,
-    changeFilterTodoListAC, FilterValuesType,
+    changeFilterTodoListAC, fetchTodolists, FilterValuesType,
     removeTodoListAC, TodolistDomainType,
     updateTodoListAC
 } from "./state/todoListsReducer";
@@ -26,6 +26,9 @@ export const App = () => {
     const todoLists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.TodoLists)
     const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
 
+    useEffect(()=>{
+     dispatch(fetchTodolists())
+    },[])
 
     const AddNewTaskHandler = useCallback((title: string) => {
         dispatch(addNewTodoListAC(title))

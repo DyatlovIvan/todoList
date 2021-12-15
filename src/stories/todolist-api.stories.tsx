@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import {todolistsApi} from "../api/todolistsApi";
+import {fetchTodolists} from "../state/todoListsReducer";
 
 export default {
     title: 'API'
@@ -30,6 +31,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     const [title, setTitle] = useState<string>('')
+
     const onClickHandler = () => {
         todolistsApi.createTodolist(title)
             .then((res) => {
@@ -205,5 +207,3 @@ export const UpdateTask = () => {
         </div>
     )
 }
-
-
