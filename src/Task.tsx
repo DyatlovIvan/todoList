@@ -3,8 +3,8 @@ import {Checkbox, IconButton} from "@mui/material";
 import {EditableSpan} from "./components/EditableSpan";
 import {Delete} from "@mui/icons-material";
 import {useDispatch} from "react-redux";
-import {changeSelectTask, removeTask, updateTask} from "./state/tasksReducer";
-import {TaskStatuses, TaskType} from "./api/todolistsApi";
+import {changeSelectTask, removeTask, removeTaskTC, updateTask} from "./state/tasksReducer";
+import {TaskStatuses, TaskType, todolistsApi} from "./api/todolistsApi";
 
 type TaskPropsType = {
     task: TaskType
@@ -13,9 +13,8 @@ type TaskPropsType = {
 export const Task = React.memo(({task, todoListID}: TaskPropsType) => {
     const dispatch = useDispatch();
     const onChangeSelectHandler = useCallback((id: string, e: ChangeEvent<HTMLInputElement>) => {
-        debugger
         const isDone = e.currentTarget.checked;
-        dispatch(changeSelectTask(todoListID, id, isDone?TaskStatuses.Complete:TaskStatuses.New))
+        dispatch(changeSelectTask(todoListID, id, isDone ? TaskStatuses.Complete : TaskStatuses.New))
     }, [dispatch])
 
     const updateTaskHandler = useCallback((id: string, newTitle: string) => {
@@ -23,7 +22,7 @@ export const Task = React.memo(({task, todoListID}: TaskPropsType) => {
     }, [dispatch])
 
     const onClickRemoveTask = useCallback((id: string) => {
-        dispatch(removeTask(todoListID, id));
+        dispatch(removeTaskTC(todoListID,id))
     }, [dispatch]);
     return (
         <div>

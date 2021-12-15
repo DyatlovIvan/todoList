@@ -135,7 +135,18 @@ test('remove task', () => {
 })
 
 test('add task', () => {
-    const endState = TasksReducer(startState, addNewTask(todoListId1, 'new task!'))
+    const endState = TasksReducer(startState, addNewTask( {
+        id: '1',
+        title: 'HTML',
+        status: TaskStatuses.Complete,
+        description: '',
+        startDate: '',
+        deadline: '',
+        addedDate: '',
+        order: 0,
+        priority: TaskPriorities.Low,
+        todoListId: 'todoListId1'
+    }))
     expect(endState[todoListId1].length).toBe(7);
     expect(endState[todoListId2].length).toBe(3);
     expect(endState[todoListId1][0].id).toBeDefined();

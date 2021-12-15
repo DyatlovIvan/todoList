@@ -7,7 +7,7 @@ import {Task} from "./Task";
 import {TaskStatuses, TaskType} from './api/todolistsApi';
 import {FilterValuesType} from "./state/todoListsReducer";
 import {useDispatch} from "react-redux";
-import {fetchTasks} from "./state/tasksReducer";
+import {setTaskTC} from "./state/tasksReducer";
 
 const theme = createTheme({
     palette: {
@@ -34,7 +34,7 @@ export const TodoList = React.memo((props: propsType) => {
     console.log('todolist')
     const dispatch = useDispatch()
     useEffect(()=>{
-     dispatch(fetchTasks(props.todoListID))
+     dispatch(setTaskTC(props.todoListID))
     },[])
 
     const onClickFilterHandler = useCallback((value: FilterValuesType) => props.changeFilter(props.todoListID, value), [props.changeFilter, props.todoListID]);

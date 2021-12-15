@@ -13,7 +13,7 @@ import {
 
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./store";
-import {addNewTask} from "./state/tasksReducer";
+import {addNewTaskTC} from "./state/tasksReducer";
 import {TaskType} from "./api/todolistsApi";
 
 
@@ -30,7 +30,7 @@ export const App = () => {
      dispatch(fetchTodolists())
     },[])
 
-    const AddNewTaskHandler = useCallback((title: string) => {
+    const addNewTodolistHandler = useCallback((title: string) => {
         dispatch(addNewTodoListAC(title))
     }, [dispatch])
 
@@ -47,7 +47,7 @@ export const App = () => {
     }, [dispatch])
 
     const addNewTaskHandler = useCallback((todoListID: string, title: string) => {
-        dispatch(addNewTask(todoListID, title))
+        dispatch(addNewTaskTC(todoListID, title))
     }, [dispatch])
 
     // const removeTask = useCallback((todoListID: string, id: string) => {
@@ -84,7 +84,7 @@ export const App = () => {
             </AppBar>
             <Container>
                 <Grid style={{padding: '20px'}}>
-                    <AddItemForm callBack={AddNewTaskHandler}/>
+                    <AddItemForm callBack={addNewTodolistHandler}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {todoLists.map(el => {
