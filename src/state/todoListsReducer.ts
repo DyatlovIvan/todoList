@@ -20,7 +20,7 @@ export const TodoListsReducer = (state: Array<TodolistDomainType> = initialState
             // return [{id: action.todoListID, title: action.title, filter: 'all', addedDate: '', order: 1}, ...state]
             return [{...action.todolist,filter:"all"}, ...state]
         }
-        case 'UPDATE-TODOLIST': {
+        case 'UPDATE-TODOLIST-TITLE': {
             return state.map(m => m.id === action.todoListID ? {...m, title: action.title} : m)
         }
         case 'CHANGE-FILTER-TODOLIST': {
@@ -38,7 +38,7 @@ export const TodoListsReducer = (state: Array<TodolistDomainType> = initialState
 }
 
 export type MainType = removeTodolistType | AddNewTodolistType
-    | updateTodoListACType
+    | updateTodolistTitleType
     | changeFilterTodoListAC
     | setTodoListsType
 
@@ -57,10 +57,10 @@ export const addNewTodolist = (todolist:TodolistType) => {
 }
 
 
-type updateTodoListACType = ReturnType<typeof updateTodoListAC>
-export const updateTodoListAC = (todoListID: string, title: string) => {
+type updateTodolistTitleType = ReturnType<typeof updateTodolistTitle>
+export const updateTodolistTitle = (todoListID: string, title: string) => {
     return {
-        type: 'UPDATE-TODOLIST', todoListID, title
+        type: 'UPDATE-TODOLIST-TITLE', todoListID, title
     } as const
 }
 
@@ -96,5 +96,12 @@ export const addNewTodolistTC = (title:string) => (dispatch:Dispatch)=>{
     return todolistsApi.createTodolist(title)
         .then(res =>{
             dispatch(addNewTodolist(res.data.data.item))
+        })
+}
+
+export const updateTodolistTitleTC = (todolistId:string, title:string) => (dispatch:Dispatch)=>{
+    return todolistsApi.updateTodolist(todolistId,title)
+        .then(res =>{
+            dispatch(updateTodolistTitle(todolistId,title))
         })
 }

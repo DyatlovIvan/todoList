@@ -7,7 +7,7 @@ import {Menu} from "@mui/icons-material";
 import {
     addNewTodolistTC,
     changeFilterTodoListAC, fetchTodolists, FilterValuesType, removeTodoListTC,
-    TodolistDomainType, updateTodoListAC
+    TodolistDomainType, updateTodolistTitleTC
 } from "./state/todoListsReducer";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -33,20 +33,20 @@ export const App = () => {
         dispatch(addNewTodolistTC(title))
     }, [dispatch])
 
-    const removeTodolist = useCallback((todoListID: string) => {
-        dispatch(removeTodoListTC(todoListID))
+    const removeTodolist = useCallback((todolistId: string) => {
+        dispatch(removeTodoListTC(todolistId))
     }, [dispatch])
 
-    const updateTodolistTitle = useCallback((todoListID: string, title: string) => {
-        dispatch(updateTodoListAC(todoListID, title))
+    const updateTodolistTitle = useCallback((todolistId: string, title: string) => {
+        dispatch(updateTodolistTitleTC(todolistId, title))
     }, [dispatch])
 
-    const changeFilter = useCallback((todoListID: string, value: FilterValuesType) => {
-        dispatch(changeFilterTodoListAC(todoListID, value))
+    const changeFilter = useCallback((todolistId: string, value: FilterValuesType) => {
+        dispatch(changeFilterTodoListAC(todolistId, value))
     }, [dispatch])
 
-    const addNewTaskHandler = useCallback((todoListID: string, title: string) => {
-        dispatch(addNewTaskTC(todoListID, title))
+    const addNewTaskHandler = useCallback((todolistId: string, title: string) => {
+        dispatch(addNewTaskTC(todolistId, title))
     }, [dispatch])
 
     // const removeTask = useCallback((todoListID: string, id: string) => {

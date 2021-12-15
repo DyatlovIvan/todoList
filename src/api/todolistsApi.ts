@@ -75,18 +75,14 @@ type GetTaskResponseType = {
 }
 
 
-type UpdateTaskModelType = {
+export type UpdateTaskModelType = {
     title: string
-    id:string
-    todoListId:string
     description: string
     status: number
     priority: number
     startDate: string
     deadline: string
-
 }
-
 
 export const todolistsApi = {
     getTodolists() {
