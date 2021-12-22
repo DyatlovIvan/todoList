@@ -1,4 +1,4 @@
-import style from "../todoList.module.css";
+import style from "../features/TodolistsList/Todolist/todoList.module.css";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type ImputWithButtonType = {

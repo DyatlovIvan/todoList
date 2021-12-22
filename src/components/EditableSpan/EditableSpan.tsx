@@ -1,7 +1,7 @@
-import style from "../todoList.module.css";
+import style from "../../features/TodolistsList/Todolist/todoList.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {TextField} from "@mui/material";
-import {TaskStatuses} from "../api/todolistsApi";
+import {TaskStatuses} from "../../api/todolistsApi";
 
 
 type EditableSpanType = {

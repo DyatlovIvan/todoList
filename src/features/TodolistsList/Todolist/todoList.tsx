@@ -1,13 +1,13 @@
 import React, {useCallback, useEffect} from 'react';
-import {AddItemForm} from "./components/AddItemForm/AddItemForm";
-import {EditableSpan} from "./components/EditableSpan";
+import {AddItemForm} from "../../../components/AddItemForm/AddItemForm";
+import {EditableSpan} from "../../../components/EditableSpan/EditableSpan";
 import {Button, createTheme, IconButton, ThemeProvider} from "@mui/material";
 import {Delete} from "@mui/icons-material";
-import {Task} from "./Task";
-import {TaskStatuses, TaskType} from './api/todolistsApi';
-import {FilterValuesType} from "./state/todoListsReducer";
+import {Task} from "./Task/Task";
+import {TaskStatuses, TaskType} from '../../../api/todolistsApi';
+import {FilterValuesType} from "./todoListsReducer";
 import {useDispatch} from "react-redux";
-import {setTaskTC} from "./state/tasksReducer";
+import {setTaskTC} from "./tasksReducer";
 
 const theme = createTheme({
     palette: {

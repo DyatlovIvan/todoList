@@ -1,7 +1,7 @@
 import {EditableSpan} from "./EditableSpan";
 import {action} from "@storybook/addon-actions";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
-import {TaskStatuses} from "../api/todolistsApi";
+import {TaskStatuses} from "../../api/todolistsApi";
 
 export default {
     title: 'EditableSpan Component',

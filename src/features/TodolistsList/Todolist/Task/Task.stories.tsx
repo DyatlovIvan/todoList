@@ -1,9 +1,9 @@
 import {Task} from "./Task";
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import {v1} from "uuid";
-import {store} from "./store";
+import {store} from "../../../../App/store";
 import {Provider} from "react-redux";
-import {TaskPriorities, TaskStatuses} from "./api/todolistsApi";
+import {TaskPriorities, TaskStatuses} from "../../../../api/todolistsApi";
 
 export default {
     title:'Task Component',

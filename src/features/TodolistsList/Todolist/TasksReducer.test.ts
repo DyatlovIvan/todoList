@@ -1,11 +1,11 @@
-import {TasksType} from "../App";
+import {TasksType} from "../../../App/App";
 import {
     addNewTask,
     removeTask, setTask,
     TasksReducer,
     updateTask
 } from "./tasksReducer";
-import {TaskPriorities, TaskStatuses} from "../api/todolistsApi";
+import {TaskPriorities, TaskStatuses} from "../../../api/todolistsApi";
 
 const todoListId1 = 'todoListId1';
 const todoListId2 = 'todoListId2';
