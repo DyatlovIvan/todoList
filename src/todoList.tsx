@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from 'react';
-import {AddItemForm} from "./components/AddItemForm";
+import {AddItemForm} from "./components/AddItemForm/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Button, createTheme, IconButton, ThemeProvider} from "@mui/material";
 import {Delete} from "@mui/icons-material";

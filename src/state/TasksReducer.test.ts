@@ -1,7 +1,6 @@
 import {TasksType} from "../App";
 import {
     addNewTask,
-    changeSelectTask,
     removeTask, setTask,
     TasksReducer,
     updateTask
@@ -159,11 +158,6 @@ test('update task', () => {
     expect(endState[todoListId1][0].title).toBe('hey')
 })
 
-test('change is done', () => {
-    const endState = TasksReducer(startState, changeSelectTask(todoListId1, '1', TaskStatuses.New))
-    expect(endState[todoListId1][0].status).toBe(TaskStatuses.New)
-    expect(endState[todoListId2][0].status).toBe(TaskStatuses.New)
-})
 
 test('set tasks', () => {
     const endstate = TasksReducer({

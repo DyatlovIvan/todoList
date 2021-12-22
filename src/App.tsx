@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import { TodoList} from "./todoList";
-import {AddItemForm} from "./components/AddItemForm";
+import {AddItemForm} from "./components/AddItemForm/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
@@ -15,9 +15,7 @@ import {AppRootState} from "./store";
 import {addNewTaskTC} from "./state/tasksReducer";
 import {TaskType} from "./api/todolistsApi";
 
-
 export type TasksType = { [key: string]: Array<TaskType> }
-
 
 export const App = () => {
 

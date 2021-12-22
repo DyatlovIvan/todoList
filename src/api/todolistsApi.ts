@@ -11,28 +11,13 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     ...settings
 })
-
+//types
 export type TodolistType = {
     id: string
     title: string
     addedDate: string
     order: number
 }
-
-// type CreateTodolistResponseType = {
-//
-//     resultCode: number
-//     messages: Array<string>
-//     data: {
-//         item: TodolistType
-//     }
-// }
-//
-// type DeleteUpdateTodolistResponseType = {
-//     resultCode: number
-//     messages: string[]
-//     data: {}
-// }
 
 type ResponseType<D = {}> = {
     resultCode: number
@@ -83,7 +68,7 @@ export type UpdateTaskModelType = {
     startDate: string
     deadline: string
 }
-
+//api
 export const todolistsApi = {
     getTodolists() {
         return instance.get<Array<TodolistType>>('todo-lists')
