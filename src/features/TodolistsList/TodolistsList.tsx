@@ -16,12 +16,18 @@ import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {TodoList} from "./Todolist/todoList";
 import {TasksType} from "../../App/App";
 
-export const TodolistsList = () => {
+type PropsType = {
+    demo?:boolean
+}
+export const TodolistsList = ({demo = false}:PropsType) => {
     const dispatch = useDispatch()
     const todoLists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.TodoLists)
     const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
 
     useEffect(() => {
+        if(demo){
+            return
+        }
         dispatch(fetchTodolists())
     }, [])
 
@@ -47,7 +53,9 @@ export const TodolistsList = () => {
     return (
         <>
             <Grid style={{padding: '20px'}}>
-                <AddItemForm callBack={addNewTodolistHandler}/>
+                <AddItemForm callBack={addNewTodolistHandler}
+                             disabled = {false}
+                />
             </Grid>
             <Grid container spacing={3}>
                 {todoLists.map(el => {
@@ -56,14 +64,13 @@ export const TodolistsList = () => {
                                 <Paper style={{padding: '10px'}}>
                                     <TodoList
                                         key={el.id}
-                                        todoListID={el.id}
-                                        title={el.title}
+                                        todoList = {el}
                                         task={tasks[el.id]}
                                         changeFilter={changeFilter}
                                         addNewTask={addNewTaskHandler}
-                                        filter={el.filter}
                                         removeTodolist={removeTodolist}
                                         updateTodolistTitle={updateTodolistTitle}
+                                        demo = {demo}
                                     />
                                 </Paper>
                             </Grid>

@@ -6,9 +6,10 @@ import {ControlPoint} from "@mui/icons-material";
 
 type AddItemFormType = {
     callBack: (title: string) => void
+    disabled:boolean
 }
 
-export const AddItemForm = React.memo( (props: AddItemFormType) => {
+export const AddItemForm = React.memo( ({callBack,disabled=false,...props}: AddItemFormType) => {
     console.log('hhh')
     const [newTaskTitle, setNewTaskTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -20,7 +21,7 @@ export const AddItemForm = React.memo( (props: AddItemFormType) => {
 
     const onKeyPressTitleHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            props.callBack(newTaskTitle);
+            callBack(newTaskTitle);
             setNewTaskTitle('');
         }
     }
@@ -31,7 +32,7 @@ export const AddItemForm = React.memo( (props: AddItemFormType) => {
             return
         }
 
-        props.callBack(newTaskTitle);
+        callBack(newTaskTitle);
         setNewTaskTitle('');
     }
     return (
@@ -43,8 +44,9 @@ export const AddItemForm = React.memo( (props: AddItemFormType) => {
                        onKeyPress={onKeyPressTitleHandler}
                        error={!!error}
                        helperText={error}
+                       disabled={disabled}
             />
-            <IconButton onClick={onClickTitleHandler} color={'primary'}>
+            <IconButton onClick={onClickTitleHandler} color={'primary'} disabled={disabled}>
                 <ControlPoint/>
             </IconButton>
             {/*{error && <div className={style.errorMessage}>{error}</div>}*/}
