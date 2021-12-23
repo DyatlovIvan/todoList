@@ -4,6 +4,7 @@ import {TaskType, todolistsApi, UpdateTaskModelType} from "../../../api/todolist
 import {Dispatch} from "redux";
 import {AppRootState} from "../../../App/store";
 import {setError, setStatus} from "../../../App/appReducer";
+import {handleServerAppError, handleServerNetworkError} from "../../../utils/errorUtils";
 
 const initialState: TasksType = {}
 
@@ -83,19 +84,15 @@ export const addNewTaskTC = (todolistId: string, title: string) => (dispatch: Di
     dispatch(setStatus('loading'))
     todolistsApi.createTask(todolistId, title)
         .then(res => {
-            if(res.data.resultCode===0){
+            if (res.data.resultCode === 0) {
                 dispatch(addNewTask(res.data.data.item))
                 dispatch(setStatus('succeeded'))
-            }else{
-                if(res.data.messages.length){
-                    dispatch(setError(res.data.messages[0]))
-                }else{
-                    dispatch(setError('Some error'))
-                }
-                dispatch(setStatus('failed'))
+            } else {
+                handleServerAppError(res.data,dispatch)
             }
-
-
+        })
+        .catch(error => {
+            handleServerNetworkError(error,dispatch)
         })
 }
 
@@ -127,7 +124,14 @@ export const updateTaskTC = (todolistId: string, taskId: string, domainModel: Up
         }
         todolistsApi.updateTask(todolistId, taskId, apiModel)
             .then(res => {
-                dispatch(updateTask(todolistId, taskId, domainModel))
+                if (res.data.resultCode === 0) {
+                    dispatch(updateTask(todolistId, taskId, domainModel))
+                } else {
+                 handleServerAppError(res.data,dispatch)
+                }
+            })
+            .catch(error => {
+                handleServerNetworkError(error,dispatch)
             })
     }
 }
