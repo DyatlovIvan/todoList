@@ -49,8 +49,6 @@ export const AddItemForm = React.memo( ({callBack,disabled=false,...props}: AddI
             <IconButton onClick={onClickTitleHandler} color={'primary'} disabled={disabled}>
                 <ControlPoint/>
             </IconButton>
-            {/*{error && <div className={style.errorMessage}>{error}</div>}*/}
-
         </div>
 
     )
