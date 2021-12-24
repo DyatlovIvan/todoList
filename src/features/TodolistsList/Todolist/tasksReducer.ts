@@ -74,9 +74,11 @@ export const setTaskTC = (todoListID: string) => (dispatch: Dispatch) => {
     }
 
 export const removeTaskTC = (todoListID: string, id: string) => (dispatch: Dispatch) => {
+    dispatch(setStatus('loading'))
     todolistsApi.deleteTask(todoListID, id)
         .then(res => {
             dispatch(removeTask(todoListID, id))
+            dispatch(setStatus('succeeded'))
         })
 }
 
@@ -86,13 +88,15 @@ export const addNewTaskTC = (todolistId: string, title: string) => (dispatch: Di
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(addNewTask(res.data.data.item))
-                dispatch(setStatus('succeeded'))
             } else {
                 handleServerAppError(res.data,dispatch)
             }
         })
         .catch(error => {
             handleServerNetworkError(error,dispatch)
+        })
+        .finally(()=>{
+            dispatch(setStatus('succeeded'))
         })
 }
 
@@ -107,7 +111,7 @@ export type UpdateDomainTaskModelType = {
 
 export const updateTaskTC = (todolistId: string, taskId: string, domainModel: UpdateDomainTaskModelType) => {
     return(dispatch: Dispatch, getState: () => AppRootState) => {
-
+        dispatch(setStatus('loading'))
         const currentTask = getState().Tasks[todolistId].find(f => f.id === taskId);
         if (!currentTask) {
             console.warn('Task not found')
@@ -132,6 +136,9 @@ export const updateTaskTC = (todolistId: string, taskId: string, domainModel: Up
             })
             .catch(error => {
                 handleServerNetworkError(error,dispatch)
+            })
+            .finally(()=>{
+                dispatch(setStatus('succeeded'))
             })
     }
 }

@@ -1,6 +1,7 @@
 import {todolistsApi, TodolistType} from "../../../api/todolistsApi";
 import {Dispatch} from "redux";
 import {RequestStatusType, setStatus} from "../../../App/appReducer";
+import {handleServerAppError, handleServerNetworkError} from "../../../utils/errorUtils";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistDomainType = TodolistType & {
@@ -86,15 +87,27 @@ export const addNewTodolistTC = (title:string) => (dispatch:Dispatch)=>{
     dispatch(setStatus('loading'))
     return todolistsApi.createTodolist(title)
         .then(res =>{
-            dispatch(addNewTodolist(res.data.data.item))
+            if(res.data.resultCode===0){
+                dispatch(addNewTodolist(res.data.data.item))
+
+            }else{
+                handleServerAppError(res.data,dispatch)
+            }
+        })
+        .catch(error=>{
+            handleServerNetworkError(error,dispatch)
+        })
+        .finally(()=>{
             dispatch(setStatus('succeeded'))
         })
 
 }
 
 export const updateTodolistTitleTC = (todolistId:string, title:string) => (dispatch:Dispatch)=>{
+    dispatch(setStatus('loading'))
     return todolistsApi.updateTodolist(todolistId,title)
         .then(res =>{
             dispatch(updateTodolistTitle(todolistId,title))
+            dispatch(setStatus('succeeded'))
         })
 }
