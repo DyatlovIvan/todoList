@@ -15,14 +15,21 @@ import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {TodoList} from "./Todolist/todoList";
 import {TasksType} from "../../App/App";
+import {useNavigate} from "react-router-dom";
 
 type PropsType = {
     demo?:boolean
 }
 export const TodolistsList = ({demo = false}:PropsType) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const todoLists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.TodoLists)
     const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
+    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.Login.isLoggedIn)
+
+    if (!isLoggedIn){
+        navigate('/login')
+    }
 
     useEffect(() => {
         if(demo){

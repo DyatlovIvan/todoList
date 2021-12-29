@@ -70,6 +70,9 @@ export const fetchTodolists = () => (dispatch: Dispatch) => {
                 dispatch(setTodoLists(res.data))
                 dispatch(setStatus('succeeded'))
             })
+            .catch(error=>{
+                handleServerNetworkError(error,dispatch)
+            })
 }
 
 export const removeTodoListTC = (todoListID:string) => (dispatch:Dispatch)=>{

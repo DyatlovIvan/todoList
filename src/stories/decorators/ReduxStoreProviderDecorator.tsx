@@ -40,7 +40,12 @@ const initialGlobalState: AppRootState = {
     },
     App:{
         error:null,
-        status:'idle'
+        status:'idle',
+        isInitialized:true
+
+    },
+    Login:{
+        isLoggedIn:true
     }
 };
 
