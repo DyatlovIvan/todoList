@@ -47,8 +47,10 @@ export const initializeApp = ()=>(dispatch:Dispatch)=>{
             if(res.data.resultCode===0){
                 dispatch(setIsLoggedIn(true))
             }else{
-
             }
+
+        })
+        .finally(()=>{
             dispatch(setAppInitialized(true))
         })
 
