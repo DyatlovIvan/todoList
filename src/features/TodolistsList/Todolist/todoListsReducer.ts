@@ -17,9 +17,10 @@ const slice = createSlice({
     initialState:initialState,
     reducers:{
         removeTodolist(state,action:PayloadAction<{todoListID: string}>){
+            console.log('reducer')
             const index = state.findIndex(tl=>tl.id===action.payload.todoListID)
             if (index>-1){
-                state.slice(index,1)
+                state.splice(index,1)
             }
         },
         addNewTodolist(state,action:PayloadAction<{todolist:TodolistType}>){

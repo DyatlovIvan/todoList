@@ -26,7 +26,8 @@ export const TodolistsList = ({demo = false}:PropsType) => {
     const todoLists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.TodoLists)
     const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
     const isLoggedIn = useSelector<AppRootState, boolean>(state => state.Login.isLoggedIn)
-
+    console.log(tasks)
+    console.log(todoLists)
     if (!isLoggedIn){
         navigate('/login')
     }

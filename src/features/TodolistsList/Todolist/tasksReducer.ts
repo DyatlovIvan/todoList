@@ -47,6 +47,7 @@ const slice = createSlice({
             state[action.payload.todolist.id] = [];
         });
         builder.addCase(removeTodolist, (state, action) => {
+            console.log('extrareducer')
             delete state[action.payload.todoListID];
         });
         builder.addCase(setTodoLists, (state, action) => {
