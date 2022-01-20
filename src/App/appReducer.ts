@@ -1,7 +1,8 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/todolistsApi";
 import {setIsLoggedIn} from "../features/Login/authReducer";
-
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+//
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
     status: RequestStatusType
@@ -9,49 +10,43 @@ export type InitialStateType = {
     //true когда приложение проинициализировалось(проверили юзера, получили настройки)
     isInitialized:boolean
 }
-export const initialState: InitialStateType = {
+
+ const initialState:InitialStateType = {
     status: 'idle',
     error: null,
     isInitialized:false
 }
 
-export const AppReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
-
-    switch (action.type) {
-        case 'APP/SET-STATUS': {
-            return {...state, status: action.status}
+const slice = createSlice({
+    name:'app',
+    initialState:initialState,
+    reducers:{
+        setError(state,action:PayloadAction<{error: string | null}>){
+            state.error = action.payload.error
+        },
+        setStatus(state,action:PayloadAction<{status:RequestStatusType}>){
+            state.status = action.payload.status
+        },
+        setAppInitialized(state,action:PayloadAction<{isInitialized:boolean}>){
+            state.isInitialized = action.payload.isInitialized
         }
-        case 'APP/SET-ERROR': {
-            return {...state, error: action.error}
-        }
-        case "APP/SET-IS-INITIALIZED":{
-            return {...state,isInitialized:action.value}
-        }
-        default:
-            return {...state}
     }
-}
+})
+export const AppReducer = slice.reducer
+export const {setError, setStatus, setAppInitialized} = slice.actions;
 
-type ActionType =
-    | ReturnType<typeof setError>
-    | ReturnType<typeof setStatus>
-    | ReturnType<typeof setAppInitialized>
-
-export const setError = (error:string|null)=>({type:'APP/SET-ERROR',error})as const
-export const setStatus = (status:RequestStatusType)=>({type:'APP/SET-STATUS',status})as const
-export const setAppInitialized = (value:boolean)=>({type:'APP/SET-IS-INITIALIZED',value})as const
 
 export const initializeApp = ()=>(dispatch:Dispatch)=>{
     authAPI.me()
         .then(res=>{
             if(res.data.resultCode===0){
-                dispatch(setIsLoggedIn(true))
+                dispatch(setIsLoggedIn({value:true}))
             }else{
             }
 
         })
         .finally(()=>{
-            dispatch(setAppInitialized(true))
+            dispatch(setAppInitialized({isInitialized:true}))
         })
 
 }

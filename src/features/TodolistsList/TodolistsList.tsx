@@ -50,8 +50,8 @@ export const TodolistsList = ({demo = false}:PropsType) => {
         dispatch(updateTodolistTitleTC(todolistId, title))
     }, [dispatch])
 
-    const changeFilter = useCallback((todolistId: string, value: FilterValuesType) => {
-        dispatch(changeFilterTodoListAC(todolistId, value))
+    const changeFilter = useCallback((todolistId: string, filter: FilterValuesType) => {
+        dispatch(changeFilterTodoListAC({todoListID:todolistId,filter: filter}))
     }, [dispatch])
 
     const addNewTaskHandler = useCallback((todolistId: string, title: string) => {
