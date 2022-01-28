@@ -98,7 +98,7 @@ export const {removeTask,addNewTask,updateTask,setTask} = slice.actions
 //             return state
 //     }
 // }
-
+//
 // type MainType =
 //     | AddNewTodolistType
 //     | removeTodolistType
@@ -107,8 +107,8 @@ export const {removeTask,addNewTask,updateTask,setTask} = slice.actions
 //     | ReturnType<typeof updateTask>
 //     | setTodoListsType
 //     | ReturnType<typeof setTask>
-
-//action
+//
+// action
 // export const removeTask = (todoListID: string, id: string) => ({type: 'REMOVE-TASK', todoListID, id}) as const
 //
 // export const addNewTask = (task: TaskType) => ({type: 'ADD-NEW-TASK', task}) as const

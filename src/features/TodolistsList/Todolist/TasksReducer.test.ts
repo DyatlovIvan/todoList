@@ -129,22 +129,25 @@ beforeEach(() => {
 
 
 test('remove task', () => {
-    const endState = TasksReducer(startState, removeTask(todoListId1, '1'))
+    const endState = TasksReducer(startState, removeTask({todoListID: todoListId1, id: '1'}))
     expect(endState[todoListId1].length).toBe(5)
 })
 
 test('add task', () => {
-    const endState = TasksReducer(startState, addNewTask( {
-        id: '1',
-        title: 'new task!',
-        status: TaskStatuses.New,
-        description: '',
-        startDate: '',
-        deadline: '',
-        addedDate: '',
-        order: 0,
-        priority: TaskPriorities.Low,
-        todoListId: 'todoListId1'
+    const endState = TasksReducer(startState, addNewTask({
+        task:
+            {
+                id: '1',
+                title: 'new task!',
+                status: TaskStatuses.New,
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                todoListId: 'todoListId1'
+            }
     }))
     expect(endState[todoListId1].length).toBe(7);
     expect(endState[todoListId2].length).toBe(3);
@@ -163,6 +166,6 @@ test('set tasks', () => {
     const endstate = TasksReducer({
         [todoListId1]: [],
         [todoListId2]: []
-    }, setTask(startState[todoListId1], 'todoListId1'))
+    }, setTask({tasks:startState[todoListId1],todoListID:'todoListId1'}))
     expect(endstate[todoListId1].length).toBe(6)
 })
