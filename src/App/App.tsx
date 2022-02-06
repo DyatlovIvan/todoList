@@ -5,21 +5,20 @@ import {
     Button,
     CircularProgress,
     Container,
-    IconButton,
     LinearProgress,
     Toolbar,
     Typography
 } from "@mui/material";
-import {Menu} from "@mui/icons-material";
 import {TaskType} from "../api/todolistsApi";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbars} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./store";
 import {initializeApp, RequestStatusType} from "./appReducer";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
 import {logoutTC} from "../features/Login/authReducer";
+import {URLS} from "../shared/urls";
 
 export type TasksType = { [key: string]: Array<TaskType> }
 type PropsType = {
@@ -43,37 +42,28 @@ export const App = ({demo = false}: PropsType) => {
         dispatch(logoutTC())
     }
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="App">
 
                 <AppBar position="static">
                     <ErrorSnackbars/>
                     <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{mr: 2}}
-                        >
-                            <Menu/>
-                        </IconButton>
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            News
+                            Todolist
                         </Typography>
                         {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
                     </Toolbar>
-                    {status === 'loading' && <LinearProgress/>}
+                    {status === RequestStatusType.Loading && <LinearProgress/>}
                 </AppBar>
                 <Container>
                     <Routes>
-                        <Route path={'/'} element={<TodolistsList demo={demo}/>}/>
-                        <Route path={'/login'} element={<Login/>}/>
+                        <Route path={URLS.BASE} element={<TodolistsList demo={demo}/>}/>
+                        <Route path={URLS.LOGIN} element={<Login/>}/>
                     </Routes>
                 </Container>
 
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 export default App;

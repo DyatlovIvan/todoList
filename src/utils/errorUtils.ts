@@ -1,4 +1,4 @@
-import {setError, setStatus} from "../App/appReducer";
+import {RequestStatusType, setError, setStatus} from "../App/appReducer";
 import {ResponseType} from "../api/todolistsApi";
 import {Dispatch} from "redux";
 
@@ -8,10 +8,10 @@ export const handleServerAppError = <D>(data:ResponseType<D>, dispatch: Dispatch
     } else {
         dispatch(setError({error:'Some error'}))
     }
-    dispatch(setStatus({status:'failed'}))
+    dispatch(setStatus({status:RequestStatusType.Failed}))
 }
 
 export const handleServerNetworkError = ( error: {message:string},dispatch: Dispatch) =>{
     dispatch(setError(error.message ? {error:error.message}:{error:'Some error'}))
-    dispatch(setStatus({status:'failed'}))
+    dispatch(setStatus({status:RequestStatusType.Failed}))
 }

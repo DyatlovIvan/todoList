@@ -16,6 +16,7 @@ import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {TodoList} from "./Todolist/todoList";
 import {TasksType} from "../../App/App";
 import {useNavigate} from "react-router-dom";
+import {URLS} from "../../shared/urls";
 
 type PropsType = {
     demo?:boolean
@@ -26,10 +27,9 @@ export const TodolistsList = ({demo = false}:PropsType) => {
     const todoLists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.TodoLists)
     const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
     const isLoggedIn = useSelector<AppRootState, boolean>(state => state.Login.isLoggedIn)
-    console.log(tasks)
-    console.log(todoLists)
+
     if (!isLoggedIn){
-        navigate('/login')
+        navigate(URLS.LOGIN)
     }
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export const TodolistsList = ({demo = false}:PropsType) => {
             return
         }
         dispatch(fetchTodolists())
-    }, [])
+    }, [demo,dispatch])
 
     const addNewTodolistHandler = useCallback((title: string) => {
         dispatch(addNewTodolistTC(title))
@@ -58,6 +58,7 @@ export const TodolistsList = ({demo = false}:PropsType) => {
     const addNewTaskHandler = useCallback((todolistId: string, title: string) => {
         dispatch(addNewTaskTC(todolistId, title))
     }, [dispatch])
+
     return (
         <>
             <Grid style={{padding: '20px'}}>

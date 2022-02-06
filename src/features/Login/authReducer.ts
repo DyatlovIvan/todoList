@@ -1,6 +1,6 @@
 import {authAPI, LoginParamsType} from "../../api/todolistsApi";
 import {Dispatch} from "redux";
-import {setStatus} from "../../App/appReducer";
+import {RequestStatusType, setStatus} from "../../App/appReducer";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/errorUtils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
@@ -24,7 +24,7 @@ export const {setIsLoggedIn} = slice.actions
 
 export const loginTC =(data:LoginParamsType)=>{
     return (dispatch:Dispatch)=>{
-        dispatch(setStatus({status:'loading'}))
+        dispatch(setStatus({status:RequestStatusType.Loading}))
         authAPI.login(data)
             .then(res=>{
                 if(res.data.resultCode ===0){
@@ -37,14 +37,14 @@ export const loginTC =(data:LoginParamsType)=>{
                 handleServerNetworkError(error,dispatch)
             })
             .finally(()=>{
-                dispatch(setStatus({status:'succeeded'}))
+                dispatch(setStatus({status:RequestStatusType.Succeeded}))
             })
     }
 }
 
 export const logoutTC =()=>{
     return (dispatch:Dispatch)=>{
-        dispatch(setStatus({status:'loading'}))
+        dispatch(setStatus({status:RequestStatusType.Loading}))
         authAPI.logout()
             .then(res=>{
                 if(res.data.resultCode ===0){
@@ -57,7 +57,7 @@ export const logoutTC =()=>{
                 handleServerNetworkError(error,dispatch)
             })
             .finally(()=>{
-                dispatch(setStatus({status:'succeeded'}))
+                dispatch(setStatus({status:RequestStatusType.Succeeded}))
             })
     }
 }

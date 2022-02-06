@@ -29,7 +29,6 @@ type propsType = {
 
 
 export const TodoList = React.memo(({demo = false, ...props}: propsType) => {
-    console.log('todolist')
     const dispatch = useDispatch()
     useEffect(() => {
         if (demo) {
@@ -40,9 +39,6 @@ export const TodoList = React.memo(({demo = false, ...props}: propsType) => {
     }, [])
 
     const onClickFilterHandler = useCallback((value: FilterValuesType) => props.changeFilter(props.todoList.id, value), [props.changeFilter, props.todoList.id]);
-    // const onAllFilterHandler = () => props.changeFilter(props.todoListID, 'all');
-    // const onActiveFilterHandler = () => props.changeFilter(props.todoListID,'active' );
-    // const onCompletedFilterHandler = () => props.changeFilter(props.todoListID, 'completed');
 
     const AddTaskHandler = useCallback((title: string) => {
         props.addNewTask(props.todoList.id, title)

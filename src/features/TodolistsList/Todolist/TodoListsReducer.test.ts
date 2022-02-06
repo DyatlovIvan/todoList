@@ -6,6 +6,7 @@ import {
     updateTodolistTitle
 } from './todoListsReducer';
 import {v1} from 'uuid';
+import {RequestStatusType} from "../../../App/appReducer";
 
 
 test('correct todolist should be removed', () => {
@@ -13,8 +14,8 @@ test('correct todolist should be removed', () => {
     let todolistId2 = v1();
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistId1, title: "What to learn", addedDate:'', order:1, filter: "all",entityStatus:'idle'},
-        {id: todolistId2, title: "What to buy", addedDate:'', order:1, filter: "all",entityStatus:'idle'}
+        {id: todolistId1, title: "What to learn", addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle},
+        {id: todolistId2, title: "What to buy", addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle}
     ]
 
     const endState = TodoListsReducer(startState, removeTodolist({todoListID:todolistId1}))
@@ -28,11 +29,11 @@ test('correct todolist should be added', () => {
     let todolistId1 = v1();
     let todolistId2 = v1();
     let todolistId = v1();
-    let newTodolistTitle = "New Todolist";
+    //let newTodolistTitle = "New Todolist";
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:'idle'},
-        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:'idle'}
+        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle},
+        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle}
     ]
 
    // const endState = TodoListReducer(startState, { type: 'ADD-TODOLIST', title: newTodolistTitle,todolistId:todolistId})
@@ -49,8 +50,8 @@ test('correct todolist should change its name', () => {
     let newTodolistTitle = "New Todolist";
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:'idle'},
-        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:'idle'}
+        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle},
+        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle}
     ]
 
     const endState = TodoListsReducer(startState, updateTodolistTitle({todoListID:todolistId2, title:newTodolistTitle}));
@@ -66,8 +67,8 @@ test('correct filter of todolist should be changed', () => {
     let newFilter: FilterValuesType = "completed";
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:'idle'},
-        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:'idle'}
+        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle},
+        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle}
     ]
 
     const endState = TodoListsReducer(startState, changeFilterTodoListAC({todoListID:todolistId2,filter:newFilter}));
@@ -80,8 +81,8 @@ test('set todolists',()=>{
     let todolistId1 = v1();
     let todolistId2 = v1();
     const state: Array<TodolistDomainType> = [
-        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:'idle'},
-        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:'idle'}
+        {id: todolistId1, title: "What to learn",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle},
+        {id: todolistId2, title: "What to buy",addedDate:'', order:1, filter: "all",entityStatus:RequestStatusType.Idle}
     ]
     const endState = TodoListsReducer([],setTodoLists({todoLists:state}))
     expect(endState.length).toBe(2)

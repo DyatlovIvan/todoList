@@ -15,15 +15,15 @@ export const Task = React.memo(({task, todoListID}: TaskPropsType) => {
     const onChangeTaskStatusHandler = useCallback((id: string, e: ChangeEvent<HTMLInputElement>) => {
         const isDone = e.currentTarget.checked;
         dispatch(updateTaskTC(todoListID, id, {status: isDone ? TaskStatuses.Complete : TaskStatuses.New}))
-    }, [dispatch])
+    }, [todoListID,dispatch])
 
     const updateTaskHandler = useCallback((id: string, newTitle: string) => {
         dispatch(updateTaskTC(todoListID, id, {title: newTitle}))
-    }, [dispatch])
+    }, [todoListID,dispatch])
 
     const onClickRemoveTask = useCallback((id: string) => {
         dispatch(removeTaskTC(todoListID, id))
-    }, [dispatch]);
+    }, [todoListID,dispatch]);
     return (
         <div>
             <Checkbox
