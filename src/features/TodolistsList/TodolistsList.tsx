@@ -17,6 +17,7 @@ import {TodoList} from "./Todolist/todoList";
 import {TasksType} from "../../App/App";
 import {useNavigate} from "react-router-dom";
 import {URLS} from "../../shared/urls";
+import {selectIsLoggedIn} from "../Auth/selectors";
 
 type PropsType = {
     demo?:boolean
@@ -26,7 +27,7 @@ export const TodolistsList = ({demo = false}:PropsType) => {
     const navigate = useNavigate()
     const todoLists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.TodoLists)
     const tasks = useSelector<AppRootState, TasksType>(state => state.Tasks)
-    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.Login.isLoggedIn)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     if (!isLoggedIn){
         navigate(URLS.LOGIN)

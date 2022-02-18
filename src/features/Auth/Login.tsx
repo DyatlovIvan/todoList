@@ -2,14 +2,14 @@ import {useFormik} from "formik";
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "./authReducer";
-import {AppRootState} from "../../App/store";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 import {LoginParamsType} from "../../api/todolistsApi";
+import {selectIsLoggedIn} from "./selectors";
 
 export const Login = () => {
 
-    const isLoggedIn = useSelector<AppRootState,boolean>(state=>state.Login.isLoggedIn)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 

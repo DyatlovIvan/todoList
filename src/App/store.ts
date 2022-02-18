@@ -2,7 +2,7 @@ import {combineReducers} from "redux";
 import {TodoListsReducer} from "../features/TodolistsList/Todolist/todoListsReducer";
 import {TasksReducer} from "../features/TodolistsList/Todolist/tasksReducer";
 import {AppReducer} from "./appReducer";
-import {AuthReducer} from "../features/Login/authReducer";
+import {AuthReducer} from "../features/Auth/authReducer";
 import {configureStore} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 
